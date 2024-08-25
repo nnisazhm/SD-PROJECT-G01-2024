@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .profile-header img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border: 5px solid #007bff;
+        }
+
+        h4 {
+            margin-top: 15px;
+            color: #007bff;
+        }
+
+        p {
+            color: #666;
+        }
+
+        .labels {
+            display: block;
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .profile-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .profile-button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-button {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <img id="profileImage" src="https://via.placeholder.com/120" alt="Profile Image">
+            <h4 id="profileName">Your Name</h4>
+            <p id="profileEmail">your.email@example.com</p>
+            <input type="file" id="imageUpload" accept="image/*">
+        </div>
+        <div>
+            <h4>Edit Profile</h4>
+            <form id="profileForm">
+                <div>
+                    <label class="labels" for="name">Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="First Name">
+                </div>
+                <div>
+                    <label class="labels" for="surname">Surname</label>
+                    <input type="text" id="surname" class="form-control" placeholder="Surname">
+                </div>
+                <div>
+                    <label class="labels" for="mobileNumber">Mobile Number</label>
+                    <input type="text" id="mobileNumber" class="form-control" placeholder="Enter phone number">
+                </div>
+                <div>
+                    <label class="labels" for="address">Address</label>
+                    <input type="text" id="address" class="form-control" placeholder="Enter address line 1">
+                </div>
+                <div>
+                    <label class="labels" for="postcode">Postcode</label>
+                    <input type="text" id="postcode" class="form-control" placeholder="Enter postcode">
+                </div>
+                <div>
+                    <label class="labels" for="email">Email ID</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter email ID">
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="profile-button" type="submit">Save Profile</button>
+                </div>
+                <div style="text-align: right; margin-top: 20px;">
+                    <a href="viewProfile.html" class="back-button">Back to View</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function loadProfile() {
+            const image = localStorage.getItem('profileImage');
+            if (image) {
+                document.getElementById('profileImage').src = image;
+            }
+
+            const name = localStorage.getItem('name') || '';
+            const surname = localStorage.getItem('surname') || '';
+            const mobileNumber = localStorage.getItem('mobileNumber') || '';
+            const address = localStorage.getItem('address') || '';
+            const postcode = localStorage.getItem('postcode') || '';
+            const email = localStorage.getItem('email') || '';
+
+            document.getElementById('profileName').textContent = name || 'Your Name';
+            document.getElementById('profileEmail').textContent = email || 'your.email@example.com';
+            document.getElementById('name').value = name;
+            document.getElementById('surname').value = surname;
+            document.getElementById('mobileNumber').value = mobileNumber;
+            document.getElementById('address').value = address;
+            document.getElementById('postcode').value = postcode;
+            document.getElementById('email').value = email;
+        }
+
+        window.onload = loadProfile;
+
+        document.getElementById('imageUpload').addEventListener('change', function(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const newImage = reader.result;
+                document.getElementById('profileImage').src = newImage;
+                localStorage.setItem('profileImage', newImage);
+            }
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        });
+
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            localStorage.setItem('name', document.getElementById('name').value);
+            localStorage.setItem('surname', document.getElementById('surname').value);
+            localStorage.setItem('mobileNumber', document.getElementById('mobileNumber').value);
+            localStorage.setItem('address', document.getElementById('address').value);
+            localStorage.setItem('postcode', document.getElementById('postcode').value);
+            localStorage.setItem('email', document.getElementById('email').value);
+
+            document.getElementById('profileName').textContent = document.getElementById('name').value || 'Your Name';
+            document.getElementById('profileEmail').textContent = document.getElementById('email').value || 'your.email@example.com';
+
+            window.location.href = 'viewProfile.html';
+        });
+    </script>
+</body>
+</html>
