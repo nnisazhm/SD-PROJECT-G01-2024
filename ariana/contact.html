@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Contact Form</title>
+    <style>
+        body {
+            background-color: #fff5f7;
+            font-family: 'Arial', sans-serif;
+        }
+        .contact-box {
+            background-color: #ffffff;
+            padding: 30px;
+            margin-top: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .contact-box h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e91e63;
+            font-size: 28px;
+        }
+        .contact-box .form-control {
+            border: 1px solid #ffc1e3;
+            border-radius: 5px;
+            background-color: #ffe4e6;
+        }
+        .contact-box .btn-primary {
+            background-color: #e91e63;
+            border-color: #e91e63;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 12px 20px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .contact-box .btn-primary:hover {
+            background-color: #d81b60;
+            border-color: #d81b60;
+        }
+        #successmsg, #errormsg {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="contact-box">
+            <h2>Contact Us</h2>
+            <form name="submit-to-google-sheet">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+        </div>
+
+        <div id="successmsg" hidden>
+            <div class="alert alert-success">
+                <strong>Success!</strong> Your message has been sent.
+            </div>
+        </div>
+
+        <div id="errormsg" hidden>
+            <div class="alert alert-danger">
+                <strong>Error!</strong> There was an error sending your message.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyJekf24Ul5OLqzN5p5GuopqYf2eUp6o9h6i4SEISCxOrTU1CEVNbu9Fg66JhN4PiIK/exec'
+        const form = document.forms['submit-to-google-sheet'];
+        const successmsg = document.getElementById('successmsg');
+        const errormsg = document.getElementById('errormsg');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    console.log('Success!', response);
+                    successmsg.hidden = false;
+                    form.reset();
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    errormsg.hidden = false;
+                });
+        });
+    </script>
+</body>
+</html>
+
