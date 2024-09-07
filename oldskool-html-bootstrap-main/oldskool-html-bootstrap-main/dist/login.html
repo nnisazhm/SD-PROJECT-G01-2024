@@ -72,17 +72,17 @@
                 <a href="#" class="btn btn-twitter d-block mb-2"><i class="ri-twitter-fill align-bottom"></i> Login with
                     Twitter</a>
                 <span class="text-muted text-center d-block fw-bolder my-4">OR</span>
-                <form action="Login.php" method="POST">
+                <form action="../dist/Login.php" method="POST">
                     <div class="form-group">
                       <label class="form-label" for="login_email">Email address</label>
-                      <input type="email" class="form-control" id="login_email" placeholder="name@email.com">
+                      <input type="email" class="form-control" id="login_email"   name="login_email" placeholder="name@email.com">
                     </div>
                     <div class="form-group">
                       <label for="login_password" class="form-label d-flex justify-content-between align-items-center">
                         Password
                         <a href="./forgotten-password.html" class="text-muted small">Forgot your password?</a>
                       </label>
-                      <input type="password" class="form-control" id="login_password" placeholder="Enter your password">
+                      <input type="password" class="form-control" id="login_password"  name="login_password" placeholder="Enter your password">
                     </div>
                     <button type="submit" class="btn btn-dark d-block w-100 my-4">Login</button>
                 </form>
