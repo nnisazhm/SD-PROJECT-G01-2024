@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        background-color: #ffffff;
+        display: flex;
+    }
+
+    .sidebar {
+        width: 250px;
+        background-color: #000000;
+        color: #fff;
+        min-height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar-header {
+        text-align: center;
+        padding: 20px;
+        border-bottom: 1px solid #32475b;
+    }
+
+    .sidebar-header h2 {
+        margin: 0;
+        font-size: 20px; /* Increased font size */
+    }
+
+    .sidebar-header p {
+        margin: 5px 0 0;
+        font-size: 16px; /* Increased font size */
+    }
+
+    .menu {
+        padding: 0;
+        margin: 0;
+        flex: 1;
+    }
+
+    .menu li {
+        padding: 15px 20px;
+        border-bottom: 1px solid #32475b;
+        cursor: pointer;
+        font-size: 36px; /* Increased font size */
+    }
+
+    .menu li:hover {
+        background-color: #1a2736;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        min-width: 150px; /* Adjust width for better readability */
+        z-index: 1;
+        padding: 10px 0;
+    }
+
+    .dropdown-content a {
+        padding: 8px 16px;
+        text-decoration: none;
+        display: block;
+        color: #333;
+        font-size: 14px; /* Adjust font size for dropdown items */
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f4f4f4;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-toggle {
+        cursor: pointer;
+    }
+
+    .main-content {
+        margin-left: 250px;
+        padding: 20px;
+        width: calc(100% - 250px);
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+    }
+
+    .search-bar {
+        padding: 10px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        width: 200px;
+    }
+
+    .search-button {
+        padding: 10px 15px;
+        background-color: #2A3F54;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin-left: 5px;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .user-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .user-name {
+        font-weight: 500;
+        font-size: 16px; /* Increased font size */
+    }
+
+    .profile-section {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .profile-content {
+        display: flex;
+    }
+
+    .profile-left {
+        flex: 1;
+        text-align: center;
+    }
+
+    .profile-pic {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+    }
+
+    .edit-profile-btn {
+        padding: 10px 20px;
+        background-color: #000000;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .profile-right {
+        flex: 2;
+        padding-left: 40px;
+    }
+
+    .profile-right h3 {
+        margin-top: 0;
+    }
+
+    .skills-section {
+        margin-top: 40px;
+    }
+
+    .skill {
+        margin-bottom: 20px;
+    }
+
+    .skill-title {
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .progress-bar {
+        background-color: #f0ffff;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .progress {
+        height: 12px;
+        border-radius: 10px;
+        background-color: #5F9EA0;
+    }
+
+    .blue-progress {
+        background-color: #8FBC8F;
+    }
+
+    .projects-section {
+        margin-top: 40px;
+    }
+
+    .projects-section table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .projects-section th, .projects-section td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    .projects-section th {
+        background-color: #000000;
+    }
+</style>
+
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Meqa.my</h2>
+            <p>Welcome</p>
+        </div>
+        <ul>
+            <li class="dropdown">
+                <a class="dropdown-toggle">Home</a>
+                <div class="dropdown-content">
+                    <a href="#">Dashboard</a>
+                    <a href="#">Dashboard2</a>
+                    <a href="#">Dashboard3</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle">Forms</a>
+                <div class="dropdown-content">
+                    <a href="#">General Forms</a>
+                    <a href="#">Advanced Components</a>
+                    <a href="#">Form Validation</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle">UI Elements</a>
+                <div class="dropdown-content">
+                    <a href="#">General Elements</a>
+                    <a href="#">Media Gallery</a>
+                    <a href="#">Widgets</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle">Tables</a>
+                <div class="dropdown-content">
+                    <a href="#">Tables</a>
+                    <a href="#">Table Dynamic</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle">Data Presentation</a>
+                <div class="dropdown-content">
+                    <a href="#">Chart</a>
+                    <a href="#">Chart</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle">Layouts</a>
+                <div class="dropdown-content">
+                    <a href="#">Fixed Sidebar</a>
+                    <a href="#">Fixed Footer</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle">Additional Pages</a>
+                <div class="dropdown-content">
+                    <a href="#">E-commerce</a>
+                    <a href="#">Project</a>
+                    <a href="#">Contacts</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <input type="text" class="search-bar" placeholder="Search for...">
+            <button class="search-button">Go!</button>
+            <div class="user-info">
+                <img src="profile-pic.png" alt="User Profile" class="user-pic">
+                <span class="user-name">hanani</span>
+            </div>
+        </div>
+
+        <div class="profile-section">
+            <h2>Admin Profile</h2>
+            <div class="profile-content">
+                <div class="profile-left">
+                    <img src="user-pic.jpg" alt="Profile Picture" class="profile-pic">
+					
+                    <h3>Wassup!</h3>
+					<p><i class="fas fa-briefcase"></i> <strong>Name:</strong> Hanani</p>
+                    <p><i class="fas fa-briefcase"></i> <strong>ID:</strong> 9703</p>
+                    <p><i class="fas fa-briefcase"></i> <strong>Gender:</strong> Female</p>
+                    <p><i class="fas fa-briefcase"></i> <strong>DOB:</strong> 5/8/1997</p>
+					<p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Ampang, KL</p>
+					<p><i class="fas fa-briefcase"></i> <strong>Position:</strong> Software Engineer</p>
+					<p><i class="fas fa-globe"></i> <strong>Website:</strong> <a href="#">www.kimlabs.com</a></p>
+					<p><i class="fas fa-briefcase"></i> <strong>Bio:</strong> nananaan</p>
+					<button class="edit-profile-btn" onclick="window.location.href='editProfileAdmin.html'">Edit Profile</button>
+                </div>
+                <div class="profile-right">
+                    <h3>Activity Report</h3>
+                    <canvas id="activityChart"></canvas>
+
+                    <!-- Skills Section -->
+                    <div class="skills-section">
+                        <h3>Skills</h3>
+                        <div class="skill">
+                            <span class="skill-title">Web Applications</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span class="skill-title">Website Design</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span class="skill-title">Automation & Testing</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 50%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <span class="skill-title">UI/UX</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projects Worked On Section -->
+                    <div class="projects-section">
+                        <h3>Projects Worked On</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Project Name</th>
+                                    <th>Client Company</th>
+                                    <th>Hours Spent</th>
+                                    <th>Contribution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>New Company Takeover Review</td>
+                                    <td>Deveint Inc</td>
+                                    <td>18</td>
+                                    <td>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 70%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>New Partner Contracts Consultancy</td>
+                                    <td>Deveint Inc</td>
+                                    <td>13</td>
+                                    <td>
+                                        <div class="progress-bar">
+                                            <div class="progress blue-progress" style="width: 40%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Partners and Investors Report</td>
+                                    <td>Deveint Inc</td>
+                                    <td>30</td>
+                                    <td>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 90%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>New Company Takeover Review</td>
+                                    <td>Deveint Inc</td>
+                                    <td>28</td>
+                                    <td>
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 80%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script>
+        var ctx = document.getElementById('activityChart').getContext('2d');
+        var activityChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['kurung', 'kebaya', 'bawal', 'shawl', 'kaftan', 'dresses'],
+                datasets: [{
+                    label: 'Activity',
+                    data: [500, 1000, 750, 1200, 1500, 1000],
+                    backgroundColor: '#000000'
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+</html>
