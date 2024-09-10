@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $verification_token = bin2hex(random_bytes(16));
 
     // Insert the new user into the database
-    $sql = "INSERT INTO users (email, password, role, created_at, verification_token, is_verified, firstname, lastname) VALUES (?, ?, 'staff', NOW(), ?, 0, ?, ?)";
+    $sql = "INSERT INTO users (email, password, role, created_at, verification_token, is_verified, firstname, lastname) VALUES (?, ?, 'customer', NOW(), ?, 0, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssss", $email, $hashed_password, $verification_token, $firstname, $lastname);
 

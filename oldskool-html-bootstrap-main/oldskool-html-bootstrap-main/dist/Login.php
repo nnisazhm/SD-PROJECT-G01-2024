@@ -47,11 +47,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit(); // Ensure that no further code is executed after redirection
         } else {
             // Invalid password
-            echo "Invalid email or password.";
+            header("Location: login.html?error=1");
+            exit();
         }
     } else {
-        // User does not exist
-        echo "Invalid email or password.";
+        $_SESSION['error_message'] = "Invalid email or password.";
+        header("Location: login.html?error=1");
+        exit();
     }
     
     $stmt->close();
