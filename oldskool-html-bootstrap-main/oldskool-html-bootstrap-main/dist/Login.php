@@ -1,9 +1,9 @@
 <?php
-
+session_start();
 // Database connection settings
 $servername = "localhost"; // Typically "localhost" if your database is on the same server
-$username = "web2"; // Your MySQL username
-$password = "web2"; // Your MySQL password
+$username = "root"; // Your MySQL username
+$password = "root"; // Your MySQL password
 $dbname = "meqa.my"; // The name of your database
 
 // Create connection
@@ -14,55 +14,48 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 echo "Connected successfully";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $email = $_POST['login_email'];
+    $password = $_POST['login_password'];
 
-// Check if both login_email and login_password are set
-if (isset($_POST['login_email']) && isset($_POST['login_password'])) {
+    // SQL query to check user
+    $sql = "SELECT * FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
     
-    function validate($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-    
-    $login_email = validate($_POST['login_email']);
-    $login_password = validate($_POST['login_password']);
-    
-    // Check for empty input before executing SQL
-    if (empty($login_email)) { 
-        header("Location: index.html?error=User Name is required");
-        exit();
-    } else if (empty($login_password)) {
-        header("Location: index.html?error=Password is required");
-        exit();
-    } else {
-        // Prepared statement to prevent SQL injection
-        $sql = "INSERT INTO user (login_email, login_password) VALUES (?, ?)";
-        $stmt = $conn->prepare($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
         
-        // Bind parameters (s means string type)
-        $stmt->bind_param("ss", $login_email, $login_password);
-        
-        // Execute statement
-        if ($stmt->execute()) {
-            echo "New record created successfully";
+        // Verifying password
+        if (password_verify($password, $row['password'])) {
+            // Setting session variables for logged in user
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['role'] = $row['role'];
+
+            ob_end_clean();
+            if ($row['role'] == 'customer') {
+                header("Location: index.html");
+            } elseif ($row['role'] == 'staff') {
+                header("Location: index.html");
+            } elseif ($row['role'] == 'admin') {
+                header("Location: index.html");
+            }
+            exit(); // Ensure that no further code is executed after redirection
         } else {
-            echo "Error: " . $stmt->error;
+            // Invalid password
+            echo "Invalid email or password.";
         }
-        
-        // Close the statement
-        $stmt->close();
-		header("Location: index.html");
-    	exit();
+    } else {
+        // User does not exist
+        echo "Invalid email or password.";
     }
     
-} else {
-    header("Location: index.html");
-    exit();
+    $stmt->close();
 }
 
-
-// Close connection
 $conn->close();
-
 ?>
