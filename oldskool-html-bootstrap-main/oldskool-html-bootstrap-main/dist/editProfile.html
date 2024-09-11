@@ -44,58 +44,59 @@
 
   <!-- Page Title -->
   <title>MEQA.MY</title>
-	<script>
-        function loadProfile() {
-            const name = localStorage.getItem('name') || '';
-            const email = localStorage.getItem('email') || '';
-			const birthday = localStorage.getItem('birthday') || '';
-            const address = localStorage.getItem('address') || '';
-            const phone = localStorage.getItem('phone') || '';
-            const gender = localStorage.getItem('gender') || '';
 
-            document.getElementById('name').value = name;
-            document.getElementById('email').value = email;
-			document.getElementById('birthday').value = birthday;
-            document.getElementById('address').value = address;
-            document.getElementById('phone').value = phone;
-            document.getElementById('gender').value = gender;
-        }
+  <script>
+    function loadProfile() {
+        const name = localStorage.getItem('name') || '';
+        const email = localStorage.getItem('email') || '';
+        const birthday = localStorage.getItem('birthday') || '';
+        const address = localStorage.getItem('address') || '';
+        const phone = localStorage.getItem('phone') || '';
+        const gender = localStorage.getItem('gender') || '';
 
-        function saveProfile(event) {
-            event.preventDefault(); 
-
-            localStorage.setItem('name', document.getElementById('name').value);
-            localStorage.setItem('email', document.getElementById('email').value);
-			localStorage.setItem('birthday', document.getElementById('birthday').value);
-            localStorage.setItem('address', document.getElementById('address').value);
-            localStorage.setItem('phone', document.getElementById('phone').value);
-            localStorage.setItem('gender', document.getElementById('gender').value);
-
-            alert('Profile updated successfully');
-            window.location.href = 'editProfile.html'; 
-        }
-
-        window.onload = loadProfile;
-		
-		function handleSearch() {
-        const query = document.getElementById('search-bar').value.trim();
-        if (query) {
-            // Redirect to search results page with query parameter
-            window.location.href = `searchResults.html?q=${encodeURIComponent(query)}`;
-        }
+        document.getElementById('name').value = name;
+        document.getElementById('email').value = email;
+        document.getElementById('birthday').value = birthday;
+        document.getElementById('address').value = address;
+        document.getElementById('phone').value = phone;
+        document.getElementById('gender').value = gender;
     }
 
-    // Attach event listener to search bar
-    document.getElementById('search-bar').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            handleSearch();
-        }
-    });
-    </script>
+    function saveProfile(event) {
+        event.preventDefault(); 
+
+        localStorage.setItem('name', document.getElementById('name').value);
+        localStorage.setItem('email', document.getElementById('email').value);
+        localStorage.setItem('birthday', document.getElementById('birthday').value);
+        localStorage.setItem('address', document.getElementById('address').value);
+        localStorage.setItem('phone', document.getElementById('phone').value);
+        localStorage.setItem('gender', document.getElementById('gender').value);
+
+        alert('Profile updated successfully');
+        window.location.href = 'editProfile.html'; 
+    }
+
+    window.onload = loadProfile;
+    
+    function handleSearch() {
+    const query = document.getElementById('search-bar').value.trim();
+    if (query) {
+        // Redirect to search results page with query parameter
+        window.location.href = `searchResults.html?q=${encodeURIComponent(query)}`;
+    }
+}
+
+// Attach event listener to search bar
+document.getElementById('search-bar').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        handleSearch();
+    }
+});
+</script>
+
 </head>
 <body class="">
 
-        <!-- Navbar -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white flex-column border-0  ">
         <div class="container-fluid">
@@ -144,13 +145,19 @@
                         <!-- /Navbar Search-->
     
                         <!-- Navbar Login-->
-                        <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="nav-link text-body" href="../dist/login.html">
-                                Account
-                            </a>
-                        </li>
+                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown dropdown position-static">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Account
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./profile.html">Profile</a></li>
+                                    <li><a class="dropdown-item" href="./login.html">Log In</a></li>
+                                </ul> 
+                            </li>
+                        </ul>
                         <!-- /Navbar Login-->
-    
+
                         <!-- Navbar Cart Icon-->
                         <li class="ms-1 d-inline-block position-relative dropdown-cart">
                             <button class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body"
@@ -302,68 +309,82 @@
             </div>
         </div>
     </nav>
-    <!-- / Navbar-->    <!-- / Navbar-->
-     
-<!-- Edit Profile Page -->
-<div class="content" style="display: flex; font-family: Arial, sans-serif; margin: 20px;">
-    <!-- Sidebar -->
-    <div class="sidebar" style="flex: 1; background-color: #f8f8f8; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-        <h2 style="margin-bottom: 20px;">Hello, John Doe</h2>
-        <ul style="list-style: none; padding: 0;">
-            <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-user" style="margin-right: 10px;"></i> Manage My Account</a></li>
-            <li style="margin-bottom: 15px;"><a href="profile.html" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-id-badge" style="margin-right: 10px;"></i> My Profile</a></li>
-            <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-address-book" style="margin-right: 10px;"></i> Address Book</a></li>
-            <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-truck" style="margin-right: 10px;"></i> Track Order</a></li>
-            <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> My Orders</a></li>
-            <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-credit-card" style="margin-right: 10px;"></i> My Payment Options</a></li>
-            <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-undo" style="margin-right: 10px;"></i> My Returns & Cancellations</a></li>
-        </ul>
+    <!-- / Navbar-->
+
+    <!-- Main Section-->
+<section class="mt-0 overflow-hidden ">
+ 
+    <!-- Edit Profile Page -->
+    <div class="content" style="display: flex; flex-wrap: wrap; font-family: Arial, sans-serif; margin: 20px;">
+    
+        <!-- Sidebar -->
+        <div class="sidebar" style="flex: 1 1 200px; background-color: #f8f8f8; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h2 style="margin-bottom: 20px;">Hello, John Doe</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-user" style="margin-right: 10px;"></i> Manage My Account</a></li>
+                <li style="margin-bottom: 15px;"><a href="profile.html" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-id-badge" style="margin-right: 10px;"></i> My Profile</a></li>
+                <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-address-book" style="margin-right: 10px;"></i> Address Book</a></li>
+                <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-truck" style="margin-right: 10px;"></i> Track Order</a></li>
+                <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> My Orders</a></li>
+                <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-credit-card" style="margin-right: 10px;"></i> My Payment Options</a></li>
+                <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-undo" style="margin-right: 10px;"></i> My Returns & Cancellations</a></li>
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    
+        <!-- Edit Profile Form -->
+        <div class="edit-profile" style="flex: 2 1 600px; margin-left: 20px; padding: 20px; border-radius: 8px; background-color: white; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <h3>Edit Profile</h3>
+            <form action="updateProfile.php" method="POST" style="margin-top: 20px;">
+                <div style="margin-bottom: 15px;">
+                    <label for="firstname" style="display: block; font-weight: bold;">First Name</label>
+                    <input type="text" id="firstname" name="firstname" value="" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+    
+                <div style="margin-bottom: 15px;">
+                    <label for="lastname" style="display: block; font-weight: bold;">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" value="" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+    
+                <div style="margin-bottom: 15px;">
+                    <label for="email" style="display: block; font-weight: bold;">E-Mail</label>
+                    <input type="email" id="email" name="email" value="" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+    
+                <div style="margin-bottom: 15px;">
+                    <label for="phone" style="display: block; font-weight: bold;">Phone Number</label>
+                    <input type="text" id="phone" name="phone" value="" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+    
+                <div style="margin-bottom: 15px;">
+                    <label for="birthday" style="display: block; font-weight: bold;">Birthday</label>
+                    <input type="date" id="birthday" name="birthday" value="" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+    
+                <div style="margin-bottom: 15px;">
+                    <label for="gender" style="display: block; font-weight: bold;">Gender</label>
+                    <select id="gender" name="gender" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+    
+                <div style="margin-bottom: 15px;">
+                    <label for="address" style="display: block; font-weight: bold;">Address</label>
+                    <input type="text" id="address" name="address" value="" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <button type="submit" style="background-color: #405678; color: #fff; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Save Changes</button>
+                    <a href="profile.html" style="margin-left: 20px; text-decoration: none; color: #000; background-color: #ccc; padding: 10px 20px; border-radius: 5px;">Cancel</a>
+                </div>
+            </form>
+        </div>
+    
     </div>
-
-    <!-- Edit Profile Form -->
-    <div class="edit-profile" style="flex: 2; margin-left: 20px; padding: 20px; border-radius: 8px; background-color: white; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-        <h3>Edit Profile</h3>
-        <form action="updateProfile.php" method="POST" style="margin-top: 20px;">
-            <div style="margin-bottom: 15px;">
-                <label for="full_name" style="display: block; font-weight: bold;">Full Name</label>
-                <input type="text" id="full_name" name="full_name" value="John Doe" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-            </div>
-
-            <div style="margin-bottom: 15px;">
-                <label for="email" style="display: block; font-weight: bold;">E-mail</label>
-                <input type="email" id="email" name="email" value="johndoe@domain.com" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-            </div>
-
-            <div style="margin-bottom: 15px;">
-                <label for="phone" style="display: block; font-weight: bold;">Phone</label>
-                <input type="text" id="phone" name="phone" value="Please enter your mobile" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-            </div>
-
-            <div style="margin-bottom: 15px;">
-                <label for="birthday" style="display: block; font-weight: bold;">Birthday</label>
-                <input type="date" id="birthday" name="birthday" value="1991-02-02" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-            </div>
-
-            <div style="margin-bottom: 15px;">
-                <label for="gender" style="display: block; font-weight: bold;">Gender</label>
-                <select id="gender" name="gender" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-                    <option value="Male" selected>Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </div>
-
-            <div style="margin-bottom: 15px;">
-                <label for="address" style="display: block; font-weight: bold;">Address</label>
-                <input type="text" id="address" name="address" value="123 Main St" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-            </div>
-            <div style="margin-top: 20px;">
-                <button type="submit" style="background-color: #405678; color: #fff; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Save Changes</button>
-                <a href="profile.html" style="margin-left: 20px; text-decoration: none; color: #000; background-color: #ccc; padding: 10px 20px; border-radius: 5px;">Cancel</a>
-            </div>
-            
-        </form>
-    </div>
-</div>
+    
+    </section>
+    
 
 
     <!--====== Main Footer ======-->

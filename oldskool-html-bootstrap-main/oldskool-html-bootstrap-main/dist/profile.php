@@ -10,7 +10,19 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Include database connection file
-include 'db_connection.php';
+$servername = "localhost";
+$username = "root";  // Your database username
+$password = "root";      // Your database password
+$dbname = "meqa.my";  // Your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 
 // Get the logged-in user's ID
 $user_id = $_SESSION['user_id'];
