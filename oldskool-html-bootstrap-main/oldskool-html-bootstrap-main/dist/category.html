@@ -96,11 +96,17 @@
                         <!-- /Navbar Search-->
     
                         <!-- Navbar Login-->
-                        <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="nav-link text-body" href="../dist/login.html">
-                                Account
-                            </a>
-                        </li>
+                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown dropdown position-static">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Account
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./profile.html">Profile</a></li>
+                                    <li><a class="dropdown-item" href="./login.html">Log In</a></li>
+                                </ul> 
+                            </li>
+                        </ul>
                         <!-- /Navbar Login-->
     
                         <!-- Navbar Cart Icon-->
