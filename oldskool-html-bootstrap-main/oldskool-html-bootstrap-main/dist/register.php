@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        echo "Email already registered.";
+        header("Location: login.html");
         $stmt->close();
         $conn->close();
         exit();
