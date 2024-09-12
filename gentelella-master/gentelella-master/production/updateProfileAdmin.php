@@ -1,59 +1,40 @@
 <?php
 session_start();
+require_once 'db_connection.php'; // Your database connection
 
-// Display errors for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Assuming the user is already logged in
+$user_id = $_SESSION['user_id']; // Correctly fetch user ID from session
 
-// Database connection settings
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "meqa";
+// Get form data
+$firstname = $_POST['firstname'];
+$location = $_POST['location'];
+$job_title = $_POST['job_title'];
+$website = $_POST['website'];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Update user profile in the database
+$sql = "UPDATE users SET firstname = ?, location = ?, job_title = ?, website = ? WHERE id = ?";
+$stmt = $conn->prepare($sql);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// Check if the prepare statement succeeded
+if ($stmt === false) {
+    die('Prepare failed: ' . $conn->error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $id = $_SESSION['user_id'];
-    $name = $_POST['name'];
-    $location = $_POST['location'];
-    $job_title = $_POST['job_title'];
-    $website = $_POST['website'];
-    $role = $_POST['role'];
+// Bind parameters to the statement
+$stmt->bind_param("ssssi", $firstname, $location, $job_title, $website, $user_id);
 
-    // Validate form data
-    if (empty($name) || empty($location) || empty($job_title) || empty($website) || empty($role)) {
-        die("Please fill in all fields.");
-    }
-
-    // SQL query to update user information
-    $sql = "UPDATE users SET name=?, location=?, job_title=?, website=?, role=? WHERE id=?";
-    $stmt = $conn->prepare($sql);
-
-    if ($stmt === false) {
-        die("Prepare failed: " . $conn->error);
-    }
-
-    // Bind parameters and execute query
-    $stmt->bind_param("sssssi", $name, $location, $job_title, $website, $role, $id);
-
-    if ($stmt->execute()) {
-        echo "Profile updated successfully.";
-        header("Location: profile.html"); // Redirect to profile page after update
-    } else {
-        echo "Error updating profile: " . $stmt->error;
-    }
-
-    $stmt->close();
+// Execute the query
+if ($stmt->execute()) {
+    $_SESSION['success'] = "Profile updated successfully!";
+} else {
+    $_SESSION['error'] = "Failed to update profile: " . $stmt->error;
 }
 
+// Close statement and connection
+$stmt->close();
 $conn->close();
+
+// Redirect back to profile page
+header("Location: profile.php");
+exit();
 ?>
