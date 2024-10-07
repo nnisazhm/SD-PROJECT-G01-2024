@@ -53,24 +53,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssss", $email, $hashed_password, $verification_token, $firstname, $lastname);
 
     if ($stmt->execute()) {
-        // Send verification email
-        $verification_link = "http://yourdomain.com/verify_email.php?token=" . $verification_token;
-
+        // Generate the verification link
+        
+      
+        // Set up email details
         $to = $email;
         $subject = "Email Verification";
-        $message = "Please verify your email by clicking on this link: " . $verification_link;
-        $headers = "From: no-reply@yourdomain.com";
-
+        $message = "Your email is already verified";
+        $headers = "From: no-reply@yourdomain.com\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8\r\n"; // Set content type to HTML
+    
+        // Send the email
         mail($to, $subject, $message, $headers);
-
+    
         // Display success message and redirect
-        echo "<p>Sign-up successful! Please log in again.</p>";
-
-        header("Location: login.html");
+        echo "<p>Sign-up successful! Please check your email to verify your account.</p>";
+        header("Location: verified.html");
         exit();
     } else {
         echo "Error: " . $stmt->error;
     }
+    
 
     $stmt->close();
     $conn->close();
