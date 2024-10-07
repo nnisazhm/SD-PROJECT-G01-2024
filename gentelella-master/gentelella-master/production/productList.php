@@ -289,7 +289,7 @@
                                                         <td><img src='{$row['image_path']}' style='width:50px;height:50px;'></td>
                                                         <td>
                                                         <a href='viewProduct.php?id={$row['product_id']}' class='btn btn-info'>View</a>
-                                                        <a href='editProductForm.html?id={$row['product_id']}' class='btn btn-warning'>Edit</a>
+                                                        <a href='editProductForm.php?product_id={$row['product_id']}' class='btn btn-warning'>Edit</a>
                                                         <button class='btn btn-danger' onclick='deleteProduct({$row['product_id']})'>Delete</button>
                                                         </td>
                                                     </tr>";
