@@ -1,77 +1,71 @@
 <?php
-// Include your database connection file
-require_once 'db_connection1.php';  // Replace with your own DB connection file
-
-// Start session
 session_start();
+require 'db_connection.php'; // Assuming db_connection.php establishes database connection
 
-// Function to hash the password securely
-function hashPassword($password) {
-    return password_hash($password, PASSWORD_BCRYPT);  // BCRYPT is recommended
-}
-
-// Function to verify the password
-function verifyPassword($password, $hashedPassword) {
-    return password_verify($password, $hashedPassword);
-}
-
-// Check if the user is logged in (assumed to have a session variable 'user_id')
+// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    die("Access denied. Please log in.");
+    header("Location: login.php");
+    exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get the submitted form data
-    $old_password = $_POST['old_password'];
-    $new_password = $_POST['new_password'];
-    $confirm_password = $_POST['confirm_password'];
+// Fetch user details from session
+$user_id = $_SESSION['user_id'];
 
-    // Validate the form
-    if (empty($old_password) || empty($new_password) || empty($confirm_password)) {
-        die("All fields are required.");
-    }
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if POST variables are set
+    if (isset($_POST['old_password'], $_POST['new_password'], $_POST['confirm_password'])) {
+        // Get user input from form
+        $old_password = $_POST['old_password'];
+        $new_password = $_POST['new_password'];
+        $confirm_password = $_POST['confirm_password'];
 
-    if ($new_password !== $confirm_password) {
-        die("New passwords do not match.");
-    }
+        // Validate form input
+        if (empty($old_password) || empty($new_password) || empty($confirm_password)) {
+            echo "<script>alert('All fields are required!');</script>";
+            exit();
+        }
 
-    // Get the current user's data from the database
-    $user_id = $_SESSION['user_id'];  // Assuming you store the logged-in user's ID in the session
-    $sql = "SELECT password FROM users WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $user_id);
-    $stmt->execute();
-    $stmt->store_result();
+        if ($new_password !== $confirm_password) {
+            echo "<script>alert('New password and confirm password do not match!');</script>";
+            exit();
+        }
 
-    if ($stmt->num_rows == 1) {
-        // Fetch the hashed password from the database
-        $stmt->bind_result($hashedPassword);
+        // Fetch the user from the database
+        $query = "SELECT password FROM users WHERE id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $stmt->bind_result($hashed_password);
         $stmt->fetch();
+        $stmt->close();
 
-        // Verify the old password
-        if (!verifyPassword($old_password, $hashedPassword)) {
-            die("Old password is incorrect.");
+        // Verify old password
+        if (!password_verify($old_password, $hashed_password)) {
+            echo "<script>alert('Incorrect old password!');</script>";
+            exit();
         }
 
-        // Hash the new password
-        $new_hashed_password = hashPassword($new_password);
+        // Hash new password
+        $new_hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
 
-        // Update the password in the database
-        $update_sql = "UPDATE users SET password = ? WHERE id = ?";
-        $update_stmt = $conn->prepare($update_sql);
-        $update_stmt->bind_param('si', $new_hashed_password, $user_id);
-
+        // Update password in the database
+        $update_query = "UPDATE users SET password = ? WHERE id = ?";
+        $update_stmt = $conn->prepare($update_query);
+        $update_stmt->bind_param("si", $new_hashed_password, $user_id);
+        
         if ($update_stmt->execute()) {
-            echo "Password updated successfully.";
+            echo "<script>
+                    alert('Password successfully changed!');
+                    window.location.href = 'profile.php';
+                  </script>";
         } else {
-            echo "Error updating password.";
+            echo "<script>alert('Failed to change password. Please try again later.');</script>";
         }
 
+        $update_stmt->close();
     } else {
-        echo "User not found.";
+        echo "<script>alert('Form not submitted properly.');</script>";
+        exit();
     }
-
-    $stmt->close();
-    $conn->close();
 }
-?>
