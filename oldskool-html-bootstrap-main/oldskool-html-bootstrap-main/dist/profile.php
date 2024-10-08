@@ -361,7 +361,8 @@ document.getElementById('search-bar').addEventListener('keypress', function (e) 
             <h2 style="margin-bottom: 20px;">Hello, <?php echo htmlspecialchars($firstname . ' ' . $lastname); ?></h2>
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-user" style="margin-right: 10px;"></i> Manage My Account</a></li>
-                <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-id-badge" style="margin-right: 10px;"></i> My Profile</a></li>
+                <li style="margin-bottom: 15px;"><a href="profile.php" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-id-badge" style="margin-right: 10px;"></i> My Profile</a></li>
+                <li style="margin-bottom: 15px;"><a href="change-password-2.html" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-id-badge" style="margin-right: 10px;"></i> Change Password</a></li>
                 <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-address-book" style="margin-right: 10px;"></i> Address Book</a></li>
                 <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-truck" style="margin-right: 10px;"></i> Track Order</a></li>
                 <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> My Orders</a></li>
