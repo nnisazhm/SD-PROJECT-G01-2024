@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Edit Staff</title>
+    <title>Meqa Dashboard</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -86,10 +86,15 @@
                       <li><a href="form_advanced.html">Manage Sales</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-users"></i> Staff <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-user"></i> Staff <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="addStaff.php">Add Staff</a></li>
                       <li><a href="viewStaffDashboard.php">Manage Staff</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-users"></i> Customer <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="ViewCust.php">Manage Customer</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -214,7 +219,6 @@
             </nav>
           </div>
         </div>
-        <!-- /top navigation -->
     <body class="nav-md">
     <div class="container body">
         <div class="main_container">
