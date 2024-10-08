@@ -2,53 +2,55 @@
 session_start();
 require 'db_connection.php';
 
-$error_message = '';
-$success_message = '';
+if (isset($_POST['email'])) {
+    $email = $_POST['email'];
 
-if (isset($_GET['token'])) {
-    $token = $_GET['token'];
+    // Validate email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "<script>alert('Invalid email format'); window.location.href = 'forgotten-password.html';</script>";
+        exit();
+    }
 
-    // Check if the token exists and is valid
-    $stmt = $conn->prepare("SELECT email FROM users WHERE verification_token = ? AND verification_token_expires > ?");
-    $stmt->bind_param("si", $token, date("U"));
+    // Check if email exists
+    $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // Token is valid
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $new_password = $_POST['new_password'];
-            $confirm_password = $_POST['confirm_password'];
+        // Generate a unique reset token
+        $token = bin2hex(random_bytes(50));
 
-            // Validate new password
-            if ($new_password !== $confirm_password) {
-                $error_message = 'Passwords do not match.';
+        // Store the token in the database with an expiration time (e.g., 1 hour)
+        $expires = date("U") + 3600; // 1 hour from now
+        $stmt->close();
+        $stmt = $conn->prepare("UPDATE users SET verification_token = ?, verification_token_expires = ? WHERE email = ?");
+        $stmt->bind_param("sis", $token, $expires, $email);
+        
+        if ($stmt->execute()) {
+            // Send email with reset link
+            $to = $email;
+            $subject = "Password Reset Request";
+            $message = "Click the link below to reset your password:\n";
+            $message .= "http://yourdomain.com/reset-password.php?token=" . $token;
+            $headers = "From: arianaarissa@graduate.utm.my\r\n";
+
+            // Assuming msmtp is configured correctly
+            if (mail($to, $subject, $message, $headers)) {
+                echo "<script>alert('Password reset link sent to your email.'); window.location.href = 'login.php';</script>";
             } else {
-                // Hash the new password
-                $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
-
-                // Update the user's password and clear the reset token
-                $stmt = $conn->prepare("UPDATE users SET password = ?, verification_token = NULL, verification_token_expires = NULL WHERE verification_token = ?");
-                $stmt->bind_param("ss", $hashed_password, $token);
-                
-                if ($stmt->execute()) {
-                    $success_message = 'Password successfully reset!';
-                    header("Location: login.php");
-                    exit();
-                } else {
-                    $error_message = 'Failed to reset password.';
-                }
+                echo "<script>alert('Failed to send email.'); window.location.href = 'forgotten-password.html';</script>";
             }
+        } else {
+            echo "<script>alert('Failed to store reset token.'); window.location.href = 'forgotten-password.html';</script>";
         }
     } else {
-        $error_message = 'Invalid or expired token.';
+        echo "<script>alert('Email not found.'); window.location.href = 'forgotten-password.html';</script>";
     }
-} else {
-    $error_message = 'No token provided.';
+    $stmt->close();
 }
 ?>
 
-<!-- HTML Form for new password input -->
 
 <!doctype html>
 <html lang="en">
@@ -95,7 +97,7 @@ if (isset($_GET['token'])) {
   </noscript>
 
   <!-- Page Title -->
-  <title>Change password</title>
+  <title>Forgot your password?</title>
 
 </head>
 <body class=" bg-light">
@@ -115,16 +117,14 @@ if (isset($_GET['token'])) {
             </a>
             <!-- / Logo-->
             <div class="shadow-xl p-4 p-lg-5 bg-white">
-                <h1 class="text-center fs-2 mb-5 fw-bold">Reset Password</h1>
-                <form action="reset_password.php?token=<?php echo htmlspecialchars($token); ?>" method="POST">
+                <h1 class="text-center fs-2 mb-5 fw-bold">Forgot your password?</h1>
+                <p class="text-muted">Please enter your email below and we will send you a secure link to reset your password.</p>
+                <form action="forgotten-password.php" method="POST">
                     <div class="form-group">
-                      <br><label for="new_password" class="form-label">New Password</label>
-                      <input type="password" class="form-control" name="new_password" id="new_password" required>
-
-                      <br><label for="confirm_password" class="form-label">Confirm New Password</label>
-                      <input type="password" class="form-control" name="confirm_password" id="confirm_password" required>
+                      <label for="forgot-password" class="form-label">Email address</label>
+                      <input type="email" name="email" class="form-control" id="forgot-password" placeholder="name@email.com" required>
                     </div>
-                    <button type="submit" class="btn btn-dark d-block w-100 my-4">Reset Password</button>
+                    <button type="submit" class="btn btn-dark d-block w-100 my-4">Send Reset Link</button>
                 </form>
             </div>
 
