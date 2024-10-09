@@ -11,14 +11,14 @@ if (isset($_POST['submit_password'])) {
     // Check if the token and new password are provided
     if (empty($token) || empty($new_password)) {
         $_SESSION['error'] = 'Invalid token or password';
-        header('Location: forgotten-password.php?token=' . urlencode($token));
+        header('Location: forgot_password.php?token=' . urlencode($token));
         exit();
     }
 
     // Validate the new password
     if (strlen($new_password) < 8 || !preg_match('/[A-Z]/', $new_password) || !preg_match('/[0-9]/', $new_password) || !preg_match('/[@$!%*?&#]/', $new_password)) {
         $_SESSION['error'] = 'Password must be at least 8 characters long and include at least one uppercase letter, one number, and one special character.';
-        header('Location: forgotten-password.php?token=' . urlencode($token));
+        header('Location: forgot_password.php?token=' . urlencode($token));
         exit();
     }
 
@@ -53,11 +53,11 @@ if (isset($_POST['submit_password'])) {
         $_SESSION['error'] = 'Invalid or expired token';
     }
 
-    header('Location: forgotten-password.php?token=' . urlencode($token));
+    header('Location: forgot_password.php?token=' . urlencode($token));
     exit();
 } else {
     $_SESSION['error'] = 'Invalid request. Please provide all required data.';
-    header('Location: forgotten-password.html');
+    header('Location: forgot_password.html');
     exit();
 }
 ?>
