@@ -30,7 +30,7 @@ if (isset($_POST['login_email'])) {
 
         if ($stmt->execute()) {
             // Send the reset link to the user's email
-            $reset_link = "http://localhost/SD-PROJECT-G01-2024/gentelella-master/gentelella-master/production/reset_password.html?token=" . urlencode($reset_token);
+            $reset_link = "http://localhost/SD-PROJECT-G01-2024/gentelella-master/gentelella-master/production/reset_password.php?reset_token=" . urlencode($reset_token);
             $subject = "Password Reset Request";
             $message = "Hi,\n\nPlease click the following link to reset your password:\n" . $reset_link . "\n\nThis link will expire in 1 hour.";
             $headers = "From: no-reply@meqa.my\r\n";
