@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Manage Customer </title>
+    <title>Manage Product</title>
     <title>Meqa Dashboard</title>
 
     <!-- Bootstrap -->
@@ -221,75 +221,214 @@
           </div>
         </div>
         <!-- /top navigation -->
-		<body class="nav-md">
-    <div class="container body">
-    <div class="main_container">
-    <div class="right_col" role="main">
-    <!--<h2 class="mt-4 text-center">Staff - Customer Dashboard</h2>-->
-    <div id="viewStaff">
-    <h3>Customer Details</h3>
-    
-    <table class="table table-striped table-hover table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th>Customer ID</th>
-                <th>First Name</th>
-				<th>Last Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Birthday</th>
-                <th>Gender</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-                // Include the database connection file
-                include 'db_connection.php';
-
-                // Query to get all customers from the database
-                $sql = "SELECT * FROM customer"; // Ensure this table name is correct
-                $result = $conn->query($sql); // Execute the query
-
-                // Check if there are results
-                if ($result->num_rows > 0) {
-                    // Output data of each row
-                    while($row = $result->fetch_assoc()) {
-                        echo "<tr>
-                                <td>" . $row["customer_id"] . "</td>
-                                <td>" . $row["first_name"] . "</td>
-								<td>" . $row["last_name"] . "</td>
-                                <td>" . $row["email"] . "</td>
-                                <td>" . $row["phone"] . "</td>
-                                <td>" . $row["birthday"] . "</td>
-                                <td>" . $row["gender"] . "</td>
-                              </tr>";
-                    }
-                } else {
-                    // If no data found
-                    echo "<tr><td colspan='6'>No customer data found</td></tr>";
-                }
-
-                // Close the database connection
-                $conn->close();
-            ?>
-        </tbody>
-    </table>
-</div>
-
-            </div>
-        </div>
-    </div>
-        <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
+          <div class="col-md-6 ">
+            <div class="x_panel" style="width: 200%;">
+              <div class="x_title">
+                <h2>Add New Staff</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <br />
+                <form class="form-horizontal form-label-left" action="productForm.php" method="POST" enctype="multipart/form-data">
+
+                  <div class="form-group row ">
+                    <label class="control-label col-md-3 col-sm-3 ">Product Name <span class="required">*</span></label>
+                    <div class="col-md-9 col-sm-9 ">
+                      <input type="text" id="product_name" name="product_name" class="form-control" placeholder="Product Name">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 ">Product Description<span class="required">*</span>
+                    </label>
+                    <div class="col-md-9 col-sm-9 ">
+                      <textarea class="form-control" id="product_description" name="product_description" rows="3" placeholder="Product Description"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 ">Product Price <span class="required">*</span></label>
+                    <div class="col-md-9 col-sm-9 ">
+                        <input type="text" id="product_price" name="product_price" class="form-control" placeholder="Product Price">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 ">Product Category <span class="required">*</span></label>
+                    <div class="col-md-9 col-sm-9 " id="product_category" name="product_category">
+                      <select class="select2_group form-control">
+                        <option>Choose option</option>
+                        <optgroup label="Eid 2024 Collection">
+                          <option id="KFTN" value="KFTN">Kaftan</option>
+                          <option id="KRG" value="KRG">Kurung</option>
+                          <option id="ABY" value="ABY">Abaya</option>
+                        </optgroup>
+                        <optgroup label="Women">
+                          <option id="TOP" value="TOP">Tops</option>
+                          <option id="BTM" value="BTM">Bottoms</option>
+                          <option id="OTW" value="OTW">Outerwear</option>
+                          <option id="DRS" value="DRS">Dresses</option>
+                          <option id="SET" value="SET">Sets</option>
+                        </optgroup>
+                        <optgroup label="Hijab">
+                          <option id="BWL" value="BWL">Bawal</option>
+                          <option id="SWL" value="SWL">Shawl</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-sm-3  control-label">Product Size <span class="required">*</span></label>
+                    <div class="col-md-9 col-sm-9 ">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_size[]" name="product_size[]" value="XS"> XS
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_size[]" name="product_size[]" value="S"> S
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_size[]" name="product_size[]" value="M"> M
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_size[]" name="product_size[]" value="L"> L
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_size[]" name="product_size[]" value="XL"> XL
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 col-sm-3  control-label">Product Color <span class="required">*</span></label>
+                    <div class="col-md-9 col-sm-9 ">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_color[]" name="product_color[]" value="Black"> Black
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_color[]" name="product_color[]" value="Gray"> Gray
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_color[]" name="product_color[]" value="White"> White
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_color[]" name="product_color[]" value="Red"> Red
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_color[]" name="product_color[]" value="Brown"> Brown
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_color[]" name="product_color[]" value="Orange"> Orange
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_color[]" name="product_color[]" value="Yellow"> Yellow
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_color[]" name="product_color[]" value="Green"> Green
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_color[]" name="product_color[]" value="Blue"> Blue
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_color[]" name="product_color[]" value="Violet"> Violet
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="product_color[]" name="product_color[]" value="Pink"> Pink
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 ">Product SKU <span class="required">*</span></label>
+                    <div class="col-md-9 col-sm-9 ">
+                        <input type="text" class="form-control" id="product_sku" name="product_sku" placeholder="Product SKU">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 ">Product Quantity <span class="required">*</span></label>
+                    <div class="col-md-9 col-sm-9 ">
+                        <input type="text" class="form-control" id="product_quantity" name="product_quantity" placeholder="Product Quantity">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 ">Product Status <span class="required">*</span></label>
+                    <div class="col-md-9 col-sm-9 ">
+                      <select class="form-control" name="product_status">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Out Of Stock">Out Of Stock</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2>Upload Product Media</h2>
+                          <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                          </ul>
+                          <div class="clearfix"></div>
+                        </div>
+                        <form action="productForm.php" method="POST" enctype="multipart/form-data">
+                          <input type="file" name="product_images[]" multiple><br><br>
+                          <button type="reset" class="btn btn-primary">Reset</button>
+                          <button type="submit" class="btn btn-success">Add Product</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
 
         <!-- /page content -->
 
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            <!--Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>-->
           </div>
           <div class="clearfix"></div>
         </footer>

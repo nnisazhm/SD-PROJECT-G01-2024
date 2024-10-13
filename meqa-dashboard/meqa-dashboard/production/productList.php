@@ -19,7 +19,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Manage Products</title>
+    <title>Add Product</title>
+    <title>Meqa Dashboard</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -99,8 +100,8 @@
                   </li>
                   <li><a><i class="fa fa-user"></i> Staff <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="productForm.html">Add Staff</a></li>
-                      <li><a href="form_advanced.html">Manage Staff</a></li>
+                      <li><a href="addStaff.php">Add Staff</a></li>
+                      <li><a href="viewStaffDashboard.php">Manage Staff</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-users"></i> Customer <span class="fa fa-chevron-down"></span></a>
@@ -120,7 +121,7 @@
             </div>
             <!-- /sidebar menu -->
 
-            <!-- menu footer button -->
+            <!-- /menu footer button -->
             <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
