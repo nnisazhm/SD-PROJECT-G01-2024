@@ -65,15 +65,16 @@
                         <nav class="d-none d-md-block">
                             <ul class="list-unstyled d-flex justify-content-start mt-4 align-items-center fw-bolder small">
                                 <li class="me-4"><a class="nav-link-checkout active"
-                                        href="./cart.html">Your Cart</a></li>
+                                        href="./cart.php">Your Cart</a></li>
                                 <li class="me-4"><a class="nav-link-checkout "
-                                        href="./checkout.html">Information</a></li>
+                                        href="./checkout.php">Information</a></li>
                                 <li class="me-4"><a class="nav-link-checkout "
-                                        href="./checkout-shipping.html">Shipping</a></li>
+                                        href="./checkout-shipping.php">Shipping</a></li>
                                 <li><a class="nav-link-checkout nav-link-last "
-                                        href="./checkout-payment.html">Payment</a></li>
+                                        href="./checkout-payment.php">Payment</a></li>
                             </ul>
-                        </nav>                        <div class="mt-5">
+                        </nav>                        
+                        <div class="mt-5">
                             <h3 class="fs-5 fw-bolder mb-0 border-bottom pb-4">Your Cart</h3>
                             <div class="table-responsive">
                                 <table class="table align-middle">
@@ -88,14 +89,16 @@
                                             <div class="col-9 offset-1">
                                                 <div>
                                                     <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                        Nike Air VaporMax 2021
+                                                        PRODUCT NAME
                                                         <i class="ri-close-line ms-3"></i>
                                                     </h6>
-                                                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 / Qty: 1</span>
+                                                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: PRODUCT SIZE / Qty: PRODUCT QUANTITY</span>
                                                 </div>
-                                                <p class="fw-bolder text-end text-muted m-0">$85.00</p>
+                                                <p class="fw-bolder text-end text-muted m-0">PRODUCT PRICE</p>
                                             </div>
-                                        </div>                                        <!-- / Cart Item-->
+                                        </div>                                        
+                                        <!-- / Cart Item-->
+
                                         <!-- Cart Item-->
                                         <div class="row mx-0 py-4 g-0 border-bottom">
                                             <div class="col-2 position-relative">
@@ -106,14 +109,15 @@
                                             <div class="col-9 offset-1">
                                                 <div>
                                                     <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                        Nike ZoomX Vaporfly
+                                                        PRODUCT NAME
                                                         <i class="ri-close-line ms-3"></i>
                                                     </h6>
-                                                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 11 / Qty: 1</span>
+                                                    <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: PRODUCT SIZE / Qty: PRODUCT QUANTITY</span>
                                                 </div>
-                                                <p class="fw-bolder text-end text-muted m-0">$125.00</p>
+                                                <p class="fw-bolder text-end text-muted m-0">PRODUCT PRICE</p>
                                             </div>
-                                        </div>                                        <!-- / Cart Item-->
+                                        </div>                                        
+                                        <!-- / Cart Item-->
                                     </tbody>
                                 </table>
                             </div>
@@ -126,18 +130,12 @@
                             <div class="d-flex flex-column flex-md-row justify-content-md-between mb-4 mb-md-2">
                                 <div>
                                     <p class="m-0 fw-bold fs-5">Grand Total</p>
-                                    <span class="text-muted small">Inc $45.89 sales tax</span>
                                 </div>
-                                <p class="m-0 fs-5 fw-bold">$422.99</p>
+                                <p class="m-0 fs-5 fw-bold">PRODUCT GRAND TOTAL</p>
                             </div>
                         </div>
-                        <div class="py-4">
-                            <div class="input-group mb-0">
-                                <input type="text" class="form-control" placeholder="Enter coupon code">
-                                <button class="btn btn-secondary btn-sm px-4">Apply</button>
-                            </div>
-                        </div>
-                        <a href="./checkout.html" class="btn btn-dark w-100 text-center" role="button">Proceed to checkout</a>                    </div>
+                        
+                        <a href="./checkout.php" class="btn btn-dark w-100 text-center" role="button">Proceed to checkout</a>                    </div>
                 </div>
             </div>
         </div>
