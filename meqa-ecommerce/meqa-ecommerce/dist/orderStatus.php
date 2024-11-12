@@ -1,4 +1,3 @@
-<!--kena tambah untuk detail mcm dkt id tu boleh tekan untuk view detail ape yang kita beli contoh id 001 tu beli mcm 2 barang gitu ke ape -->
 <!doctype html>
 <html lang="en">
 
@@ -37,8 +36,6 @@
 <link rel="stylesheet" href="css/utility.css">
 <link rel="stylesheet" href="css/app.css">
 
-
-
   <!-- Fix for custom scrollbar if JS is disabled-->
   <noscript>
     <style>
@@ -52,7 +49,7 @@
   </noscript>
 
   <!-- Page Title -->
-  <title>Order History</title>
+  <title>Order Status</title>
 
 </head>
 <body class="">
@@ -272,124 +269,180 @@
     </nav>
     <!-- / Navbar-->    <!-- / Navbar-->
 
-<!-- Main Section-->
+<!-- Main Section -->
 <section class="mt-0 overflow-hidden">
-    <!-- Page Content Goes Here -->
+    <!-- Dark Background for Breadcrumb -->
     <div class="bg-dark py-6">
         <div class="container-fluid">
             <nav class="m-0" aria-label="breadcrumb">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item breadcrumb-light"><a href="orderHistory.php">View Order History</a></li>
                     <li class="breadcrumb-item breadcrumb-light"><a href="orderDetails.php">View Order Details</a></li>
-                    <li class="breadcrumb-item breadcrumb-light active" aria-current="page"><a href="viewOrderStatus.php">View Order Status</a></li>
+                    <li class="breadcrumb-item breadcrumb-light active" aria-current="page">View Order Status</li>
                 </ol>
             </nav>
         </div>
     </div>
 
     <?php
-    // Connect to database
-    include 'db.php';
+    include('db.php'); // Include your database connection
 
-    // Initialize an empty array for orders
-    $orders = [];
+    // Get order_id from a GET request
+    $order_id = isset($_GET['order_id']) ? $_GET['order_id'] : null;
 
-    try {
-        // Retrieve order history
-        $sql_orders = "SELECT * FROM orders"; 
-        $stmt_orders = $conn->prepare($sql_orders);
-        $stmt_orders->execute();
-        $result_orders = $stmt_orders->get_result();
-
-        // Fetch orders data
-        while ($row = $result_orders->fetch_assoc()) {
-            $orders[] = $row;
-        }
-    } catch (Exception $e) {
-        echo "Error retrieving order history: " . $e->getMessage();
+    if ($order_id) {
+        // Fetch the order status from the database
+        $query = "SELECT status FROM orders WHERE order_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $order_id);
+        $stmt->execute();
+        $stmt->bind_result($status);
+        $stmt->fetch();
+        $stmt->close();
+    } else {
+        echo "No order ID provided.";
+        $status = 0; // Set to 0 to avoid errors in the HTML
     }
     ?>
 
-    <style>
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            font-family: Arial, sans-serif;
-            color: #000;
-        }
-        th, td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid #000;
-        }
-        th {
-            background-color: #000;
-            color: #fff;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(odd) {
-            background-color: #fff;
-        }
-        tr:hover {
-            background-color: #ccc;
-        }
-        a {
-            color: #000;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .view-status-btn {
-            background-color: #333;
-            color: white;
-            padding: 8px 15px;
-            text-decoration: none;
-            border-radius: 25px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        .view-status-btn:hover {
-            background-color: #555;
-            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
-            transform: translateY(-2px);
-        }
-    </style>
+    <div class="order-container">
+        <!-- Progress Bar -->
+        <div class="order-progress-bar">
+            <div class="order-progress" style="width: <?php echo ($status * 25) . '%'; ?>">
+                <?php
+                switch ($status) {
+                    case 1:
+                        echo "Order Placed";
+                        break;
+                    case 2:
+                        echo "Shipping";
+                        break;
+                    case 3:
+                        echo "Out for Delivery";
+                        break;
+                    case 4:
+                        echo "Order Received";
+                        break;
+                    default:
+                        echo "No Status";
+                        break;
+                }
+                ?>
+            </div>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Total Amount (RM)</th>
-                <th>Number of Items</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($orders as $order): ?>
-                <tr>
-                    <td>
-                        <a href="orderDetails.php?order_id=<?php echo $order['order_id']; ?>">
-                            <?php echo $order['order_id']; ?>
-                        </a>
-                    </td>
-                    <td><?php echo $order['total_amount']; ?></td>
-                    <td><?php echo $order['item_count']; ?></td>
-                    <td>
-                        <a href="orderStatus.php?order_id=<?php echo $order['order_id']; ?>" class="view-status-btn">View Status</a>
-                    </td>             
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
+        <!-- Status Steps -->
+        <div class="status-progress">
+            <div class="status-step <?php echo ($status >= 1) ? 'status-active' : ''; ?>">
+                <i class="fas fa-check-circle"></i>
+                <p>Order Placed</p>
+            </div>
+            <div class="status-step <?php echo ($status >= 2) ? 'status-active' : ''; ?>">
+                <i class="fas fa-truck"></i>
+                <p>Shipping</p>
+            </div>
+            <div class="status-step <?php echo ($status >= 3) ? 'status-active' : ''; ?>">
+                <i class="fas fa-box"></i>
+                <p>Out for Delivery</p>
+            </div>
+            <div class="status-step <?php echo ($status == 4) ? 'status-active' : ''; ?>">
+                <i class="fas fa-home"></i>
+                <p>Order Received</p>
+            </div>
+        </div>
 
-    <!-- /Page Content -->
+        <!-- Back to Order History Button -->
+        <div>
+            <a href="orderHistory.php" class="order-btn">Back to Order History</a>
+        </div>
+    </div>
 </section>
+
+<!-- CSS for Order Status Page -->
+<style>
+    .bg-dark {
+        background-color: #343a40;
+        color: #ffffff;
+    }
+    .breadcrumb-item a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    .breadcrumb-item.active {
+        color: #adb5bd;
+    }
+
+    .order-container {
+        max-width: 600px;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .order-progress-bar {
+        background-color: #f1f1f1;
+        border-radius: 20px;
+        overflow: hidden;
+        height: 20px;
+        margin-bottom: 20px;
+    }
+
+    .order-progress {
+        background-color: #4CAF50; /* Green color for progress */
+        height: 100%;
+        width: 0;
+        transition: width 0.5s;
+        color: #fff;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+    }
+
+    .status-progress {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+
+    .status-step {
+        text-align: center;
+        color: #aaa;
+    }
+
+    .status-step p {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .status-step i {
+        font-size: 24px;
+        color: #ddd;
+        margin-bottom: 5px;
+    }
+
+    .status-active {
+        color: #4CAF50;
+    }
+
+    .status-active i {
+        color: #4CAF50;
+    }
+
+    /* Button Style */
+    .order-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #333;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+    }
+
+    .order-btn:hover {
+        background-color: #555;
+    }
+</style>
 
     <!-- / Main Section-->
     <!--====== Main Footer ======-->
