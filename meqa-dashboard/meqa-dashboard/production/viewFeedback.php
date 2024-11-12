@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Manage Staff</title>
+    <title>Manage Feedback</title>
     <title>Meqa Dashboard</title>
 
     <!-- Bootstrap -->
@@ -45,8 +45,8 @@
         }
 
         .table-bordered th {
-            background-color: #2b3e50; /* Blue background for headers */
-            color: #fff; /* White text color for better contrast */
+            background-color: #fff; /* Blue background for headers */
+            color: #000000; /* White text color for better contrast */
             font-weight: bold;
         }
 
@@ -253,56 +253,87 @@
           </div>
         </div>
         <!-- /top navigation -->
+
 		<body class="nav-md">
        <div class="container body">
         <div class="main_container">
-            <div class="right_col" role="main">
-                <!--<h2 class="mt-4 text-center">Admin - Staff Management Dashboard</h2>-->
-				<!--<a href="addStaff.php" class="btn btn-primary">Add Staff</a>-->
-    <div id="viewFeedback">
-        <h3>View Feedback</h3>
-        <table class="table table-bordered">
-            <?php
-            include 'db2.php'; // Connect to the database
-
-            // Fetch all feedback from the database
-            $sql = "SELECT feedback_id, feedback_category, feedback, date_submitted FROM feedback ORDER BY date_submitted DESC";
-            $result = $conn->query($sql);
-            ?>
-            <?php if ($result->num_rows > 0): ?>
-                <table class="table-bordered">
-                    <tr>
-                        <th>Feedback ID</th>
-                        <th>Feedback Category</th>
-                        <th>Feedback</th>
-                        <th>Date Submitted</th>
-                        <th>Actions</th> <!-- New column for actions -->
-                    </tr>
-                    <?php while ($row = $result->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo $row['feedback_id']; ?></td>
-                            <td><?php echo htmlspecialchars($row['feedback_category']); ?></td>
-                            <td><?php echo nl2br(htmlspecialchars($row['feedback'])); ?></td>
-                            <td><?php echo $row['date_submitted']; ?></td>
-                            <td class="actions">
-                                <!--Delete links -->
-                                <a href="deleteFeedback.php?id=<?php echo $row['feedback_id']; ?>" onclick="return confirm('Are you sure you want to delete this feedback?');">Delete</a>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                </table>
-            <?php else: ?>
-                <p>No feedback available.</p>
-            <?php endif; ?>
-
-            <?php
-            $conn->close(); // Close the database connection
-            ?>
-        </table>
-    </div>
+   <div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Manage Feedback</h3>
             </div>
         </div>
     </div>
+
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel" style="width: 100%;">
+            <div class="x_title">
+                <h2>Feedback List</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <?php
+                            include 'db2.php'; // Connect to the database
+
+                            // Fetch all feedback from the database
+                            $sql = "SELECT id, name, email, subject, message, submitted_at FROM feedback ORDER BY submitted_at DESC";
+                            $result = $conn->query($sql);
+                            ?>
+
+                            <?php if ($result->num_rows > 0): ?>
+                                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr style="background-color: FFFFFF;">
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Subject</th>
+                                            <th>Message</th>
+                                            <th>Date Submitted</th>
+                                            <th>Actions</th> <!-- Actions column -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php while ($row = $result->fetch_assoc()): ?>
+                                            <tr>
+                                                <td><?php echo $row['id']; ?></td>
+                                                <td><?php echo htmlspecialchars($row['name']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['email']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['subject']); ?></td>
+                                                <td><?php echo nl2br(htmlspecialchars($row['message'])); ?></td>
+                                                <td><?php echo $row['submitted_at']; ?></td>
+                                                <td>
+                                                    <!-- Delete button -->
+                                                    <a href="deleteFeedback.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this feedback?');">Delete</a>
+                                                </td>
+                                            </tr>
+                                        <?php endwhile; ?>
+                                    </tbody>
+                                </table>
+                            <?php else: ?>
+                                <p>No feedback available.</p>
+                            <?php endif; ?>
+
+                            <?php
+                            $conn->close(); // Close the database connection
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
         <!-- /top navigation -->
 
         <!-- page content -->
