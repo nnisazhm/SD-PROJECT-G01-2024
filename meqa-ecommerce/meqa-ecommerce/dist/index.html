@@ -885,7 +885,6 @@
                                           <li><a href="about.html" style="text-decoration: none; color: white; font-weight: 400;">About us</a></li>
                                           <li><a href="contact.html" style="text-decoration: none; color: white; font-weight: 400;">Contact Us</a></li>
                                           <li><a href="index.html" style="text-decoration: none; color: white; font-weight: 400;">Sitemap</a></li>
-										  <li><a href="feedbackForm.php" style="text-decoration: none; color: white; font-weight: 400;">Feedback</a></li>
                                           <li><a href="orderHistory.php" style="text-decoration: none; color: white; font-weight: 400;">Delivery</a></li>
                                           <li><a href="shop-side-version-2.html" style="text-decoration: none; color: white; font-weight: 400;">Store</a></li>
                                       </ul>
@@ -895,48 +894,49 @@
                       </div>
                   </div>
                   <div class="col-lg-4 col-md-12">
-                      <div class="outer-footer__content">
-                          <span class="fw-bold mb-2" style="color: white; font-weight: 700;">Get In Touch</span>
-                          <form class="contact-f" method="post" action="index.html">
-                              <div class="row">
-                                  <div class="col-lg-6 col-md-6 u-h-100">
-                                      <div class="u-s-m-b-30">
-                                          <label for="c-name"></label>
-                                          <input class="input-text input-text--border-radius input-text--primary-style" 
-                                              type="text" id="c-name" placeholder="Name (Required)" required 
-                                              style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
-                                      </div>
-                                      <div class="u-s-m-b-30">
-                                          <label for="c-email"></label>
-                                          <input class="input-text input-text--border-radius input-text--primary-style" 
-                                              type="text" id="c-email" placeholder="Email (Required)" required 
-                                              style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
-                                      </div>
-                                      <div class="u-s-m-b-30">
-                                          <label for="c-subject"></label>
-                                          <input class="input-text input-text--border-radius input-text--primary-style" 
-                                              type="text" id="c-subject" placeholder="Subject (Required)" required 
-                                              style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
-                                      </div>
-                                  </div>
-                                  <div class="col-lg-6 col-md-6 u-h-100">
-                                      <div class="u-s-m-b-30">
-                                          <label for="c-message"></label>
-                                          <textarea class="text-area text-area--border-radius text-area--primary-style" 
-                                              id="c-message" placeholder="Compose a Message (Required)" required 
-                                              style="width: 100%; padding: 10px; height: 165px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;"></textarea>
-                                      </div>
-                                  </div>
-                                  <div class="col-lg-12">
-                                      <button class="btn btn--e-brand-b-2" type="submit" 
-                                          style="background-color: #ffffff; color: black; padding: 10px; margin-bottom: 20px; border: none; border-radius: 5px; font-size: 14px; cursor: pointer; transition: background-color 0.3s ease; font-family: 'Roboto', sans-serif; font-weight: 700;">
-                                          Send Message
-                                      </button>
-                                  </div>
-                              </div>
-                          </form>
-                      </div>
-                  </div>
+    <div class="outer-footer__content">
+        <span class="fw-bold mb-2" style="color: white; font-weight: 700;">Get In Touch</span>
+        <form class="contact-f" method="post" action="feedbackForm.php">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 u-h-100">
+                    <div class="u-s-m-b-30">
+                        <label for="c-name"></label>
+                        <input name="name" class="input-text input-text--border-radius input-text--primary-style" 
+                            type="text" id="c-name" placeholder="Name (Required)" required 
+                            style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
+                    </div>
+                    <div class="u-s-m-b-30">
+                        <label for="c-email"></label>
+                        <input name="email" class="input-text input-text--border-radius input-text--primary-style" 
+                            type="text" id="c-email" placeholder="Email (Required)" required 
+                            style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
+                    </div>
+                    <div class="u-s-m-b-30">
+                        <label for="c-subject"></label>
+                        <input name="subject" class="input-text input-text--border-radius input-text--primary-style" 
+                            type="text" id="c-subject" placeholder="Subject (Required)" required 
+                            style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 u-h-100">
+                    <div class="u-s-m-b-30">
+                        <label for="c-message"></label>
+                        <textarea name="message" class="text-area text-area--border-radius text-area--primary-style" 
+                            id="c-message" placeholder="Compose a Message (Required)" required 
+                            style="width: 100%; padding: 10px; height: 165px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <button class="btn btn--e-brand-b-2" type="submit" 
+                        style="background-color: #ffffff; color: black; padding: 10px; margin-bottom: 20px; border: none; border-radius: 5px; font-size: 14px; cursor: pointer; transition: background-color 0.3s ease; font-family: 'Roboto', sans-serif; font-weight: 700;">
+                        Send Message
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
               </div>
           </div>
       </div>

@@ -1,4 +1,3 @@
-<!--kena tambah untuk detail mcm dkt id tu boleh tekan untuk view detail ape yang kita beli contoh id 001 tu beli mcm 2 barang gitu ke ape -->
 <!doctype html>
 <html lang="en">
 
@@ -52,7 +51,7 @@
   </noscript>
 
   <!-- Page Title -->
-  <title>Order History</title>
+  <title>Order Details</title>
 
 </head>
 <body class="">
@@ -272,9 +271,8 @@
     </nav>
     <!-- / Navbar-->    <!-- / Navbar-->
 
-<!-- Main Section-->
 <section class="mt-0 overflow-hidden">
-    <!-- Page Content Goes Here -->
+    <!-- Dark Background for Header and Breadcrumb -->
     <div class="bg-dark py-6">
         <div class="container-fluid">
             <nav class="m-0" aria-label="breadcrumb">
@@ -288,29 +286,69 @@
     </div>
 
     <?php
-    // Connect to database
-    include 'db.php';
+    // Sambung ke pangkalan data
+    include('db.php');
 
-    // Initialize an empty array for orders
-    $orders = [];
+    // Dapatkan order_id dari permintaan GET
+    $order_id = isset($_GET['order_id']) ? $_GET['order_id'] : null;
 
-    try {
-        // Retrieve order history
-        $sql_orders = "SELECT * FROM orders"; 
-        $stmt_orders = $conn->prepare($sql_orders);
-        $stmt_orders->execute();
-        $result_orders = $stmt_orders->get_result();
+    if ($order_id) {
+        // Dapatkan butiran pesanan dari pangkalan data
+        $query = "SELECT product_name, quantity, price, subtotal FROM order_details WHERE order_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $order_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        // Fetch orders data
-        while ($row = $result_orders->fetch_assoc()) {
-            $orders[] = $row;
+        if ($result->num_rows > 0) {
+            echo '<table>';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>Product Name</th>';
+            echo '<th>Quantity</th>';
+            echo '<th>Price (RM)</th>';
+            echo '<th>Subtotal (RM)</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+            
+            // Paparkan setiap butiran pesanan
+            while ($row = $result->fetch_assoc()) {
+                echo '<tr>';
+                echo '<td>' . htmlspecialchars($row['product_name']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['quantity']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['price']) . '</td>';
+                echo '<td>' . htmlspecialchars($row['subtotal']) . '</td>';
+                echo '</tr>';
+            }
+            echo '</tbody>';
+            echo '</table>';
+
+            // Butang di luar jadual, tanpa garis atau baris tambahan
+            echo '<div style="text-align: right; margin: 20px auto; width: 80%;">';
+            echo '<a href="orderStatus.php?order_id=' . $order_id . '" class="btn-view-status">View Order Status</a>';
+            echo '</div>';
+        } else {
+            echo '<p>No details found for this order.</p>';
         }
-    } catch (Exception $e) {
-        echo "Error retrieving order history: " . $e->getMessage();
+        $stmt->close();
+    } else {
+        echo '<p>No order ID provided.</p>';
     }
     ?>
 
     <style>
+        .bg-dark {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .breadcrumb-item a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .breadcrumb-item.active {
+            color: #adb5bd;
+        }
         table {
             width: 80%;
             margin: 20px auto;
@@ -336,60 +374,26 @@
         tr:hover {
             background-color: #ccc;
         }
-        a {
-            color: #000;
+        .btn-view-status {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
             text-decoration: none;
+            border-radius: 4px;
             font-weight: bold;
+            display: inline-block;
         }
-        a:hover {
-            text-decoration: underline;
-        }
-        .view-status-btn {
-            background-color: #333;
-            color: white;
-            padding: 8px 15px;
-            text-decoration: none;
-            border-radius: 25px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        .view-status-btn:hover {
-            background-color: #555;
-            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
-            transform: translateY(-2px);
+        .btn-view-status:hover {
+            background-color: #444;
         }
     </style>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Total Amount (RM)</th>
-                <th>Number of Items</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($orders as $order): ?>
-                <tr>
-                    <td>
-                        <a href="orderDetails.php?order_id=<?php echo $order['order_id']; ?>">
-                            <?php echo $order['order_id']; ?>
-                        </a>
-                    </td>
-                    <td><?php echo $order['total_amount']; ?></td>
-                    <td><?php echo $order['item_count']; ?></td>
-                    <td>
-                        <a href="orderStatus.php?order_id=<?php echo $order['order_id']; ?>" class="view-status-btn">View Status</a>
-                    </td>             
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
-
-    <!-- /Page Content -->
 </section>
+
+
+
+
+
+
 
     <!-- / Main Section-->
     <!--====== Main Footer ======-->
