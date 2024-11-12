@@ -43,7 +43,7 @@
   </noscript>
 
   <!-- Page Title -->
-  <title>OldSkool | Bootstrap 5 HTML Template</title>
+  <title>Checkout | MEQA.MY</title>
 
 </head>
 <body class="">
@@ -65,13 +65,13 @@
                         <nav class="d-none d-md-block">
                             <ul class="list-unstyled d-flex justify-content-start mt-4 align-items-center fw-bolder small">
                                 <li class="me-4"><a class="nav-link-checkout "
-                                        href="./cart.html">Your Cart</a></li>
+                                        href="./cart.php">Your Cart</a></li>
                                 <li class="me-4"><a class="nav-link-checkout "
-                                        href="./checkout.html">Information</a></li>
+                                        href="./checkout.php">Information</a></li>
                                 <li class="me-4"><a class="nav-link-checkout "
-                                        href="./checkout-shipping.html">Shipping</a></li>
+                                        href="./checkout-shipping.php">Shipping</a></li>
                                 <li><a class="nav-link-checkout nav-link-last active"
-                                        href="./checkout-payment.html">Payment</a></li>
+                                        href="./checkout-payment.php">Payment</a></li>
                             </ul>
                         </nav>                        <div class="mt-5">
                             <!-- Checkout Information Summary -->
@@ -81,21 +81,21 @@
                                         <span class="text-muted small me-2 f-w-36 fw-bolder">Contact</span>
                                         <span class="small">test@email.com</span>
                                     </div>
-                                    <a href="./checkout.html" class="text-muted small" role="button">Change</a>
+                                    <a href="./checkout.php" class="text-muted small" role="button">Change</a>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-start align-items-center">
                                         <span class="text-muted small me-2 f-w-36 fw-bolder">Deliver To</span>
                                         <span class="small">123 Street, London, SM3 5TY, United Kingdom</span>
                                     </div>
-                                    <a href="./checkout-shipping.html" class="text-muted small" role="button">Change</a>
+                                    <a href="./checkout-shipping.php" class="text-muted small" role="button">Change</a>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-start align-items-center">
                                         <span class="text-muted small me-2 f-w-36 fw-bolder">Method</span>
                                         <span class="small">UPS Priority Delivery</span>
                                     </div>
-                                    <a href="./checkout-shipping.html" class="text-muted small" role="button">Change</a>
+                                    <a href="./checkout-shipping.php" class="text-muted small" role="button">Change</a>
                                 </li>
                             </ul><!-- / Checkout Information Summary-->
                             
@@ -192,7 +192,7 @@
                             </div>
                             
                             <div class="pt-5 mt-5 pb-5 border-top d-flex flex-column flex-md-row justify-content-between align-items-center">
-                              <a href="./checkout-shipping.html" class="btn ps-md-0 btn-link fw-bolder w-100 w-md-auto mb-2 mb-md-0" role="button">Back to
+                              <a href="./checkout-shipping.php" class="btn ps-md-0 btn-link fw-bolder w-100 w-md-auto mb-2 mb-md-0" role="button">Back to
                                 shipping</a>
                               <a href="#" class="btn btn-dark w-100 w-md-auto" role="button">Complete Order</a>
                             </div>

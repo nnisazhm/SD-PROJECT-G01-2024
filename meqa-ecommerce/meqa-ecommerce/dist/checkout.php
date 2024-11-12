@@ -43,7 +43,7 @@
   </noscript>
 
   <!-- Page Title -->
-  <title>OldSkool | Bootstrap 5 HTML Template</title>
+  <title>Checkout | MEQA.MY</title>
 
 </head>
 <body class="">
@@ -64,15 +64,15 @@
                         <!-- / Logo-->
                         <nav class="d-none d-md-block">
                             <ul class="list-unstyled d-flex justify-content-start mt-4 align-items-center fw-bolder small">
-                                <li class="me-4"><a class="nav-link-checkout "
-                                        href="./cart.html">Your Cart</a></li>
                                 <li class="me-4"><a class="nav-link-checkout active"
-                                        href="./checkout.html">Information</a></li>
+                                        href="./cart.php">Your Cart</a></li>
                                 <li class="me-4"><a class="nav-link-checkout "
-                                        href="./checkout-shipping.html">Shipping</a></li>
+                                        href="./checkout.php">Information</a></li>
+                                <li class="me-4"><a class="nav-link-checkout "
+                                        href="./checkout-shipping.php">Shipping</a></li>
                                 <li><a class="nav-link-checkout nav-link-last "
-                                        href="./checkout-payment.html">Payment</a></li>
-                            </ul>
+                                        href="./checkout-payment.php">Payment</a></li>
+                             </ul>
                         </nav>                        <div class="mt-5">
                             <!-- Checkout Panel Information-->
                             <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-4">
@@ -238,7 +238,7 @@
                             <!-- / Billing Address-->
                             
                             <div class="pt-5 mt-5 pb-5 border-top d-flex justify-content-md-end align-items-center">
-                              <a href="./checkout-shipping.html" class="btn btn-dark w-100 w-md-auto" role="button">Proceed to shipping</a>
+                              <a href="./checkout-shipping.php" class="btn btn-dark w-100 w-md-auto" role="button">Proceed to shipping</a>
                             </div>                        </div>
                     </div>
                 </div>
