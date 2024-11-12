@@ -89,7 +89,7 @@
 
                         <!-- Navbar Cart Icons-->
                         <li class="ms-1 d-inline-block position-relative dropdown-cart">
-                            <a button class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body" type="button" href="cart.html">
+                            <a button class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body" type="button" href="cart.php">
                                 Bag
                             </a>
                         </li>

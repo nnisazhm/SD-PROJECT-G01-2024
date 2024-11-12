@@ -1,3 +1,29 @@
+<?php
+// Include DB connection file
+include('db_connection.php');
+
+// Fetch products from the database
+$sql = "SELECT * FROM product WHERE category = 'Outerwear' AND status = 'available'";
+$result = mysqli_query($conn, $sql);
+if (!$result) {
+    die("Error executing query: " . mysqli_error($conn));
+}
+
+// Fetch product images from the database
+function getProductImages($productId, $conn) {
+    $stmt = $conn->prepare("SELECT * FROM product_images WHERE product_id = ?");
+    $stmt->bind_param("i", $productId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $images = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $images[] = $row;
+    }
+    return $images;
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -43,7 +69,7 @@
   </noscript>
 
   <!-- Page Title -->
-  <title>Alminaa Nadi Rosie Bawal | MEQA.MY</title>
+  <title>Jennie Denim Hoodie | MEQA.MY</title>
 </head>
 
 <body class="">
@@ -169,161 +195,113 @@
     <!-- / Navbar-->
 
     <!-- Main Section-->
-    <section class="mt-0 ">
-        <!-- Page Content Goes Here -->            
-        
-        <!-- Breadcrumbs-->
-        <div class="bg-dark py-6">
-            <div class="container-fluid">
-                <nav class="m-0" aria-label="breadcrumb">
-                    <ol class="breadcrumb m-0">
-                      <li class="breadcrumb-item breadcrumb-light"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item breadcrumb-light"><a href="category-hijab.html">Hijab</a></li>
-                      <li class="breadcrumb-item  breadcrumb-light active" aria-current="page">Alminaa Nadi Rosie Bawal</li>
+    <section class="mt-0">
+        <div class="container-fluid position-relative z-index-20">
+            <h1 class="fw-bold display-6 mb-4 text-white">Sets</h1>
+            <p class="text-white mb-0 fs-5">Save the hassle of mix & match and grab our matching sets today!</p>
+        </div>
+
+        <!-- Category Toolbar-->
+        <div class="d-flex justify-content-between items-center pt-5 pb-4 flex-column flex-lg-row">
+            <div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Sets</li>
                     </ol>
-                </nav>            
+                </nav>
+                <h1 class="fw-bold fs-3 mb-2">Sets (<?php echo mysqli_num_rows($result); ?>)</h1>
             </div>
         </div>
-        <!-- / Breadcrumbs-->
 
-        <div class="container-fluid mt-5">
-
-            <!-- Product Top Section-->
-            <div class="row g-9" data-sticky-container>
-
-                <!-- Product Images-->
-                <div class="col-12 col-md-6 col-xl-7">
-                    <div class="row g-3" data-aos="fade-right">
-                        <div class="col-12">
+        <!-- Products-->
+        <div class="row g-4">
+            <?php while ($product = mysqli_fetch_assoc($result)): ?>
+                <?php
+                    // Fetch product images
+                    $images = getProductImages($product['id'], $conn);
+                    $primaryImage = isset($images[0]) ? $images[0]['image_url'] : 'default.jpg'; // Default image
+                ?>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="card">
+                        <div class="card-img">
+                            <?php if ($product['discount_price']): ?>
+                                <div class="card-badges">
+                                    <span class="badge badge-card"><span class="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1"></span> Sale</span>
+                                </div>
+                            <?php endif; ?>
                             <picture>
-                                <img class="img-fluid" data-zoomable src="./assets/images/products/meqaAlminaaNadiRosie.png">
+                                <img class="w-100 img-fluid" src="./assets/images/products/<?php echo $primaryImage; ?>" alt="<?php echo $product['name']; ?>">
                             </picture>
                         </div>
-                        
+                        <div class="card-body">
+                            <a href="./product-sets-<?php echo strtolower(str_replace(' ', '-', $product['name'])); ?>.php"><?php echo $product['name']; ?></a>
+                            <small class="text-muted"><?php echo $product['colors']; ?>, <?php echo $product['sizes']; ?></small>
+                            <p>
+                                <?php if ($product['discount_price']): ?>
+                                    <s class="text-muted">RM<?php echo $product['price']; ?></s>
+                                    <span class="text-danger">RM<?php echo $product['discount_price']; ?></span>
+                                <?php else: ?>
+                                    RM<?php echo $product['price']; ?>
+                                <?php endif; ?>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <!-- /Product Images-->
-    
-                <!-- Product Information-->
-                <div class="col-12 col-md-6 col-lg-5">
-                    <div class="sticky-top top-5">
-                        <div class="pb-3" data-aos="fade-in">
-                            <div class="d-flex align-items-center mb-3">
-                                <p class="small fw-bolder text-uppercase tracking-wider text-muted m-0 me-4">Hijab</p>
-                            </div>
-                            
-                            <h1 class="mb-1 fs-2 fw-bold">Alminaa Nadi Rosie Bawal</h1>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="fs-4 m-0">RM35</p>
-                            </div>
-                            <div class="border-top mt-4 mb-3 product-option">
-                                <small class="text-uppercase pt-4 d-block fw-bolder">
-                                    <span class="text-muted">Product Sizes</span> : <span class="selected-option fw-bold"
-                                        data-pixr-product-option="size">BIDANG 45</span>
-                                </small>
-
-                                <div class="mt-4 d-flex justify-content-start flex-wrap align-items-start">
-                                            <div class="form-check-option form-check-rounded">
-                                                <input 
-                                                    type="radio" 
-                                                    name="product-option-sizes" 
-                                                    value="Bidang 45" 
-                                                    id="option-sizes-0">
-                                                <label for="option-sizes-0">
-                                                    <small>BIDANG 45</small>
-                                                </label>
-                                            </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <small class="text-uppercase pt-4 d-block fw-bolder text-muted">
-                                    Product Colors :
-                                </small>
-                                <div class="mt-4 d-flex justify-content-start flex-wrap align-items-start">
-                                    <picture class="me-2">
-                                        <img class="f-w-24 p-2 bg-light border-bottom border-dark border-2 cursor-pointer" src="./assets/images/products/meqaAlminaaNadiRosie.png">
-                                    </picture>
-                                </div>
-                            </div>
-                            <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow">Add To Cart</button><br><br>
-                        
-                            
-                        
-                            <!-- Product Accordion -->
-                            <div class="accordion" id="accordionProduct">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                      Product Details
-                                    </button>
-                                  </h2>
-                                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionProduct">
-                                    <div class="accordion-body">
-                                        <p class="m-0">premium square scarf bidang 45
-                                            <br>- soft cotton , lembut & sejuk
-                                            <br>- mudah bentuk
-                                            <br>- tak panas & tak pekak
-                                        </p>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                            <!-- / Product Accordion-->
-                        </div>                    </div>
-                </div>
-                <!-- / Product Information-->
-            </div>
-            <!-- / Product Top Section-->
-
-            
-
+            <?php endwhile; ?>
         </div>
-
-        <!-- /Page Content -->
     </section>
     <!-- / Main Section-->
 
+
+
     <!-- Footer -->
     <footer class="border-top py-5 mt-4  ">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row">
-                <div>
-                    <ul class="list-unstyled">
-                        <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
-                                href="#"><i class="ri-instagram-fill"></i></a></li>
-                        <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
-                                href="#"><i class="ri-facebook-fill"></i></a></li>
-                        <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
-                                href="#"><i class="ri-twitter-fill"></i></a></li>
-                        <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
-                                href="#"><i class="ri-snapchat-fill"></i></a></li>
-                    </ul>
-                </div>
-                <div class="d-flex align-items-center justify-content-end flex-column flex-lg-row">
-                    <p class="small m-0 text-center text-lg-start">&copy; 2021 OldSkool All Rights Reserved. Template by <a
-                            href="https://www.pixelrocket.store">Pixel Rocket</a></p>
-                    <ul class="list-unstyled mb-0 ms-lg-4 mt-3 mt-lg-0 d-flex justify-content-end align-items-center">
-                        <li class="bg-light p-2 d-flex align-items-center justify-content-center me-2">
-                            <i class="pi pi-sm pi-paypal"></i></li>
-                        <li class="bg-light p-2 d-flex align-items-center justify-content-center me-2">
-                            <i class="pi pi-sm pi-mastercard"></i></li>
-                        <li class="bg-light p-2 d-flex align-items-center justify-content-center me-2">
-                            <i class="pi pi-sm pi-american-express"></i></li>
-                        <li class="bg-light p-2 d-flex align-items-center justify-content-center"><i
-                                class="pi pi-sm pi-visa"></i>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>    <!-- / Footer-->  
+      <div class="container-fluid">
+          <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row">
+              <div>
+                  <ul class="list-unstyled">
+                      <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
+                              href="#"><i class="ri-instagram-fill"></i></a></li>
+                      <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
+                              href="#"><i class="ri-facebook-fill"></i></a></li>
+                      <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
+                              href="#"><i class="ri-twitter-fill"></i></a></li>
+                      <li class="d-inline-block me-1"><a class="text-decoration-none text-dark-hover transition-all"
+                              href="#"><i class="ri-snapchat-fill"></i></a></li>
+                  </ul>
+              </div>
+              <div class="d-flex align-items-center justify-content-end flex-column flex-lg-row">
+                  <p class="small m-0 text-center text-lg-start">&copy; 2021 OldSkool All Rights Reserved. Template by <a
+                          href="https://www.pixelrocket.store">Pixel Rocket</a></p>
+                  <ul class="list-unstyled mb-0 ms-lg-4 mt-3 mt-lg-0 d-flex justify-content-end align-items-center">
+                      <li class="bg-light p-2 d-flex align-items-center justify-content-center me-2">
+                          <i class="pi pi-sm pi-paypal"></i></li>
+                      <li class="bg-light p-2 d-flex align-items-center justify-content-center me-2">
+                          <i class="pi pi-sm pi-mastercard"></i></li>
+                      <li class="bg-light p-2 d-flex align-items-center justify-content-center me-2">
+                          <i class="pi pi-sm pi-american-express"></i></li>
+                      <li class="bg-light p-2 d-flex align-items-center justify-content-center"><i
+                              class="pi pi-sm pi-visa"></i>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </footer>    
+  <!-- / Footer-->  
 
-    <!-- Theme JS -->
-    <!-- Vendor JS -->
-    <script src="./assets/js/vendor.bundle.js"></script>
-    
-    <!-- Theme JS -->
-    <script src="./assets/js/theme.bundle.js"></script>
+  <!-- Theme JS -->
+  <!-- Vendor JS -->
+  <script src="./assets/js/vendor.bundle.js"></script>
+  
+  <!-- Theme JS -->
+  <script src="./assets/js/theme.bundle.js"></script>
 </body>
 
 </html>
+
+<?php
+// Close the connection
+mysqli_close($conn);
+?>

@@ -43,7 +43,7 @@
   </noscript>
 
   <!-- Page Title -->
-  <title>Melati Kurung | MEQA.MY</title>
+  <title>Anggun Kurung | MEQA.MY</title>
 </head>
 
 <body class="">
@@ -89,7 +89,7 @@
 
                         <!-- Navbar Cart Icons-->
                         <li class="ms-1 d-inline-block position-relative dropdown-cart">
-                            <a button class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body" type="button" href="cart.html">
+                            <a button class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body" type="button" href="cart.php">
                                 Bag
                             </a>
                         </li>
@@ -179,7 +179,7 @@
                     <ol class="breadcrumb m-0">
                       <li class="breadcrumb-item breadcrumb-light"><a href="#">Home</a></li>
                       <li class="breadcrumb-item breadcrumb-light"><a href="category-eid.html">Eid 2024</a></li>
-                      <li class="breadcrumb-item  breadcrumb-light active" aria-current="page">Melati Kurung</li>
+                      <li class="breadcrumb-item  breadcrumb-light active" aria-current="page">Anggun Kurung</li>
                     </ol>
                 </nav>            </div>
         </div>
@@ -195,7 +195,7 @@
                     <div class="row g-3" data-aos="fade-right">
                         <div class="col-12">
                             <picture>
-                                <img class="img-fluid" data-zoomable src="./assets/images/products/meqaMelatiKurungBlackPink.jpg">
+                                <img class="img-fluid" data-zoomable src="./assets/images/products/meqaAnggunKurungSilverPurple.jpg">
                             </picture>
                         </div>
                         
@@ -211,9 +211,9 @@
                                 <p class="small fw-bolder text-uppercase tracking-wider text-muted m-0 me-4">Eid 2024</p>
                             </div>
                             
-                            <h1 class="mb-1 fs-2 fw-bold">Melati Kurung</h1>
+                            <h1 class="mb-1 fs-2 fw-bold">Anggun Kurung</h1>
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="fs-4 m-0">RM149</p>
+                                <p class="fs-4 m-0">RM289</p>
                             </div>
                             <div class="border-top mt-4 mb-3 product-option">
                                 <small class="text-uppercase pt-4 d-block fw-bolder">
@@ -292,10 +292,10 @@
                                 </small>
                                 <div class="mt-4 d-flex justify-content-start flex-wrap align-items-start">
                                     <picture class="me-2">
-                                        <img class="f-w-24 p-2 bg-light border-bottom border-dark border-2 cursor-pointer" src="./assets/images/products/meqaMelatiKurungBlack.jpg">
+                                        <img class="f-w-24 p-2 bg-light border-bottom border-dark border-2 cursor-pointer" src="./assets/images/products/meqaAnggunKurungPink.jpg">
                                     </picture>
                                     <picture>
-                                        <img class="f-w-24 p-2 bg-light cursor-pointer" src="./assets/images/products/meqaMelatiKurungPink.jpg">
+                                        <img class="f-w-24 p-2 bg-light cursor-pointer" src="./assets/images/products/meqaAnggunKurungBlack.jpg">
                                     </picture>
                                 </div>
                             </div>
@@ -313,14 +313,12 @@
                                   </h2>
                                   <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionProduct">
                                     <div class="accordion-body">
-                                        <p class="m-0">Material : Soft Satin , very soft , comfy & airy 
+                                        <p class="m-0">Combination of Indo , Indian & Malay traditional costume made this gorgeous piece  
 
-                                            <br><br>- FREE SHAWL & BROOCH!
-                                            <br>- Top : V neck , full buttons with full sulam piku at the edge and sleeves
-                                            <br>- Bust 46 inches
-                                            <br>- Length 26 inches
-                                            <br>- Sleeves 22 inches
-                                            <br>- Skirt : Pareo with strings (adjustable, suitable for height until 172cm) 100cm x 150cm</p>
+                                            <br><br>- Made from high quality soft satin (lining) & organza lace.
+                                            <br>- front zipper
+                                            <br>- stretchable waist 
+                                            <br>- Both are LABUH</p>
                                     </div>
                                   </div>
                                 </div>
