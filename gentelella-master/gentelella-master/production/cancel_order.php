@@ -1,30 +1,50 @@
 <?php
-// Connect to the database
-include 'db_connection.php'; // Ensure you have a file with your DB connection
+// cancel_order.php
+include 'db_connection1.php';
 
-if (isset($_POST['order_id'])) {
-    $order_id = $_POST['order_id'];
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-    // Update the order status to 'Cancelled'
-    $query = "UPDATE orders SET status = 'Cancelled' WHERE order_id = ?";
-    
-    if ($stmt = $conn->prepare($query)) {
-        $stmt->bind_param("i", $order_id);
-        $stmt->execute();
+try {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['order_id'])) {
+        $order_id = (int)$_POST['order_id']; // Sanitize the input
 
-        if ($stmt->affected_rows > 0) {
-            echo "Order has been cancelled successfully.";
+        if ($order_id > 0) {
+            // Prepare the query to cancel the order
+            $query = "UPDATE orders SET order_status = 'Cancelled' WHERE order_id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("i", $order_id);
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) {
+                // Success
+                header("Location: admin_dashboard.php?message=" . urlencode("Order has been cancelled successfully."));
+                exit(); // Ensure to exit after the header redirection
+            } else {
+                // Failed to cancel (e.g., no order found or already cancelled)
+                header("Location: admin_dashboard.php?error=" . urlencode("Failed to cancel the order."));
+                exit(); // Ensure to exit after the header redirection
+            }
         } else {
-            echo "Failed to cancel the order. Please try again.";
+            // Invalid order_id
+            header("Location: admin_dashboard.php?error=" . urlencode("Invalid order ID."));
+            exit(); // Ensure to exit after the header redirection
         }
-
-        $stmt->close();
     } else {
-        echo "Database error.";
+        // Missing order_id
+        header("Location: admin_dashboard.php?error=" . urlencode("Order ID not provided."));
+        exit(); // Ensure to exit after the header redirection
     }
-} else {
-    echo "Order ID not provided.";
+} catch (Exception $e) {
+    // Log the error
+    error_log("Error cancelling order: " . $e->getMessage());
+    header("Location: admin_dashboard.php?error=" . urlencode("An error occurred while cancelling the order."));
+    exit(); // Ensure to exit after the header redirection
+} finally {
+    // Always close the database connection at the end of the script
+    if (isset($conn)) {
+        $conn->close();
+    }
 }
-
-$conn->close();
 ?>
