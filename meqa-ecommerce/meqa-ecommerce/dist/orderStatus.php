@@ -269,6 +269,27 @@
     </nav>
     <!-- / Navbar-->    <!-- / Navbar-->
 
+<?php
+include('db.php'); // Menyertakan koneksi database
+
+// Mengambil order_id dari permintaan GET
+$order_id = isset($_GET['order_id']) ? $_GET['order_id'] : null;
+
+if ($order_id) {
+    // Mengambil status pesanan dari database
+    $query = "SELECT order_status FROM orders WHERE order_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    $stmt->bind_result($order_status);
+    $stmt->fetch();
+    $stmt->close();
+} else {
+    echo "No order ID provided.";
+    $order_status = null;
+}
+?>
+
 <!-- Main Section -->
 <section class="mt-0 overflow-hidden">
     <!-- Dark Background for Breadcrumb -->
@@ -284,81 +305,64 @@
         </div>
     </div>
 
-    <?php
-    include('db.php'); // Include your database connection
-
-    // Get order_id from a GET request
-    $order_id = isset($_GET['order_id']) ? $_GET['order_id'] : null;
-
-    if ($order_id) {
-        // Fetch the order status from the database
-        $query = "SELECT status FROM orders WHERE order_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("i", $order_id);
-        $stmt->execute();
-        $stmt->bind_result($status);
-        $stmt->fetch();
-        $stmt->close();
-    } else {
-        echo "No order ID provided.";
-        $status = 0; // Set to 0 to avoid errors in the HTML
-    }
-    ?>
-
     <div class="order-container">
         <!-- Progress Bar -->
         <div class="order-progress-bar">
-            <div class="order-progress" style="width: <?php echo ($status * 25) . '%'; ?>">
-                <?php
-                switch ($status) {
-                    case 1:
-                        echo "Order Placed";
+            <div class="order-progress" style="width: <?php 
+                // Mengatur lebar berdasarkan status
+                switch ($order_status) {
+                    case 'Pending':
+                        echo '25%';
                         break;
-                    case 2:
-                        echo "Shipping";
+                    case 'Processing':
+                        echo '50%';
                         break;
-                    case 3:
-                        echo "Out for Delivery";
+                    case 'Out for Delivery':
+                        echo '75%';
                         break;
-                    case 4:
-                        echo "Order Received";
+                    case 'Order Received':
+                        echo '100%';
                         break;
                     default:
-                        echo "No Status";
+                        echo '0%';
                         break;
                 }
+            ?>">
+                <?php
+                // Menampilkan teks status berdasarkan nilai
+                echo $order_status ? $order_status : "No Status";
                 ?>
             </div>
         </div>
 
         <!-- Status Steps -->
         <div class="status-progress">
-            <div class="status-step <?php echo ($status >= 1) ? 'status-active' : ''; ?>">
+            <div class="status-step <?php echo ($order_status == 'Pending') ? 'status-active' : ''; ?>">
                 <i class="fas fa-check-circle"></i>
                 <p>Order Placed</p>
             </div>
-            <div class="status-step <?php echo ($status >= 2) ? 'status-active' : ''; ?>">
+            <div class="status-step <?php echo ($order_status == 'Processing') ? 'status-active' : ''; ?>">
                 <i class="fas fa-truck"></i>
                 <p>Shipping</p>
             </div>
-            <div class="status-step <?php echo ($status >= 3) ? 'status-active' : ''; ?>">
+            <div class="status-step <?php echo ($order_status == 'Out for Delivery') ? 'status-active' : ''; ?>">
                 <i class="fas fa-box"></i>
                 <p>Out for Delivery</p>
             </div>
-            <div class="status-step <?php echo ($status == 4) ? 'status-active' : ''; ?>">
+            <div class="status-step <?php echo ($order_status == 'Order Received') ? 'status-active' : ''; ?>">
                 <i class="fas fa-home"></i>
                 <p>Order Received</p>
             </div>
         </div>
 
-        <!-- Back to Order History Button -->
+        <!-- Tombol Kembali ke Riwayat Pesanan -->
         <div>
             <a href="orderHistory.php" class="order-btn">Back to Order History</a>
         </div>
     </div>
 </section>
 
-<!-- CSS for Order Status Page -->
+<!-- CSS untuk Order Status Page -->
 <style>
     .bg-dark {
         background-color: #343a40;
@@ -427,7 +431,6 @@
         color: #4CAF50;
     }
 
-    /* Button Style */
     .order-btn {
         display: inline-block;
         padding: 10px 20px;
@@ -443,6 +446,8 @@
         background-color: #555;
     }
 </style>
+
+
 
     <!-- / Main Section-->
     <!--====== Main Footer ======-->

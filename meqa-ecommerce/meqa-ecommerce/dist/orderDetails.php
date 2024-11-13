@@ -286,15 +286,13 @@
     </div>
 
     <?php
-    // Sambung ke pangkalan data
+
     include('db.php');
 
-    // Dapatkan order_id dari permintaan GET
     $order_id = isset($_GET['order_id']) ? $_GET['order_id'] : null;
 
     if ($order_id) {
-        // Dapatkan butiran pesanan dari pangkalan data
-        $query = "SELECT product_name, quantity, price, subtotal FROM order_details WHERE order_id = ?";
+        $query = "SELECT product_name, quantity, price, subtotal FROM orders WHERE order_id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $order_id);
         $stmt->execute();
@@ -311,8 +309,6 @@
             echo '</tr>';
             echo '</thead>';
             echo '<tbody>';
-            
-            // Paparkan setiap butiran pesanan
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
                 echo '<td>' . htmlspecialchars($row['product_name']) . '</td>';
@@ -323,8 +319,6 @@
             }
             echo '</tbody>';
             echo '</table>';
-
-            // Butang di luar jadual, tanpa garis atau baris tambahan
             echo '<div style="text-align: right; margin: 20px auto; width: 80%;">';
             echo '<a href="orderStatus.php?order_id=' . $order_id . '" class="btn-view-status">View Order Status</a>';
             echo '</div>';

@@ -291,20 +291,16 @@
     // Connect to database
     include 'db.php';
 
-    // Initialize an empty array for orders
-    $orders = [];
-
     try {
+        // Initialize an empty array for orders
+        $orders = [];
+
         // Retrieve order history
-        $sql_orders = "SELECT * FROM orders"; 
+        $sql_orders = "SELECT order_id, total_amount, item_count FROM orders"; 
         $stmt_orders = $conn->prepare($sql_orders);
         $stmt_orders->execute();
-        $result_orders = $stmt_orders->get_result();
+        $orders = $stmt_orders->get_result()->fetch_all(MYSQLI_ASSOC);
 
-        // Fetch orders data
-        while ($row = $result_orders->fetch_assoc()) {
-            $orders[] = $row;
-        }
     } catch (Exception $e) {
         echo "Error retrieving order history: " . $e->getMessage();
     }
@@ -386,10 +382,8 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-</div>
-
-    <!-- /Page Content -->
 </section>
+
 
     <!-- / Main Section-->
     <!--====== Main Footer ======-->
