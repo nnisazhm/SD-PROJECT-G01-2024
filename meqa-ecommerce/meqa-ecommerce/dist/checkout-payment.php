@@ -104,20 +104,7 @@
                             
                             <div class="row">
                             
-                              <!-- Payment Option-->
-                              <div class="col-12">
-                                <div class="form-check form-group form-check-custom form-radio-custom mb-3">
-                                  <input class="form-check-input" type="radio" name="checkoutPaymentMethod" id="checoutPaymentStripe" checked>
-                                  <label class="form-check-label" for="checoutPaymentStripe">
-                                    <span class="d-flex justify-content-between align-items-start">
-                                      <span>
-                                        <span class="mb-0 fw-bolder d-block">Credit Card (Stripe)</span>
-                                      </span>
-                                      <i class="ri-bank-card-line"></i>
-                                    </span>
-                                  </label>
-                                </div>
-                              </div>
+                              
                             
                               <!-- Payment Option-->
                               <div class="col-12">
@@ -126,7 +113,7 @@
                                   <label class="form-check-label" for="checkoutPaymentPaypal">
                                     <span class="d-flex justify-content-between align-items-start">
                                       <span>
-                                        <span class="mb-0 fw-bolder d-block">PayPal</span>
+                                        <span class="mb-0 fw-bolder d-block">ToyyibPay</span>
                                       </span>
                                       <i class="ri-paypal-line"></i>
                                     </span>
@@ -136,60 +123,14 @@
                             
                             </div>
                             
-                            <!-- Payment Details-->
-                            <div class="card-details">
-                              <div class="row pt-3">
-                                <div class="col-md-12">
-                                  <div class="form-group">
-                                    <label for="cc-name" class="form-label">Name on card</label>
-                                    <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                                    <small class="text-muted">Full name as displayed on card</small>
-                                  </div>
-                                </div>
-                            
-                                <div class="col-md-12">
-                                  <div class="form-group">
-                                    <label for="cc-number" class="form-label">Credit card number</label>
-                                    <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-                                  </div>
-                                </div>
-                            
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label for="cc-expiration" class="form-label">Expiration</label>
-                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-                                  </div>
-                                </div>
-                            
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <div class="d-flex">
-                                      <label for="cc-cvv" class="form-label d-flex w-100 justify-content-between align-items-center">Security Code</label>
-                                      <button type="button" class="btn btn-link p-0 fw-bolder fs-xs text-nowrap" data-bs-toggle="tooltip"
-                                              data-bs-placement="top"
-                                              title="A CVV is a number on your credit card or debit card that's in addition to your credit card number and expiration date">
-                                        What's this?
-                                      </button>
-                                    </div>
-                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- / Payment Details-->
                             
                             <!-- Paypal Info-->
                             <div class="paypal-details bg-light p-4 d-none my-3 fw-bolder">
-                              Please click on complete order. You will then be transferred to Paypal to enter your payment details.
+                              Please click on complete order. You will then be transferred to ToyyibPay to enter your payment details.
                             </div>
                             <!-- /Paypal Info-->
                             
-                            <!-- Accept Terms Checkbox-->
-                            <div class="form-group form-check m-0">
-                              <input type="checkbox" class="form-check-input" id="accept-terms" checked>
-                              <label class="form-check-label fw-bolder" for="accept-terms">I agree to OldSkool's <a href="#">terms &
-                                  conditions</a></label>
-                            </div>
+                            
                             
                             <div class="pt-5 mt-5 pb-5 border-top d-flex flex-column flex-md-row justify-content-between align-items-center">
                               <a href="./checkout-shipping.php" class="btn ps-md-0 btn-link fw-bolder w-100 w-md-auto mb-2 mb-md-0" role="button">Back to
@@ -205,7 +146,6 @@
                             <!-- Cart Item-->
                             <div class="row mx-0 py-4 g-0 border-bottom">
                                 <div class="col-2 position-relative">
-                                        <span class="checkout-item-qty">3</span>
                                     <picture class="d-block border">
                                         <img class="img-fluid" src="./assets/images/products/product-cart-1.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
                                     </picture>
@@ -214,17 +154,16 @@
                                     <div>
                                         <h6 class="justify-content-between d-flex align-items-start mb-2">
                                             Nike Air VaporMax 2021
-                                            <i class="ri-close-line ms-3"></i>
                                         </h6>
                                         <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 / Qty: 1</span>
                                     </div>
                                     <p class="fw-bolder text-end text-muted m-0">$85.00</p>
                                 </div>
-                            </div>    <!-- / Cart Item-->
+                            </div>    
+                            <!-- / Cart Item-->
                             <!-- Cart Item-->
                             <div class="row mx-0 py-4 g-0 border-bottom">
                                 <div class="col-2 position-relative">
-                                        <span class="checkout-item-qty">3</span>
                                     <picture class="d-block border">
                                         <img class="img-fluid" src="./assets/images/products/product-cart-2.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
                                     </picture>
@@ -233,7 +172,6 @@
                                     <div>
                                         <h6 class="justify-content-between d-flex align-items-start mb-2">
                                             Nike ZoomX Vaporfly
-                                            <i class="ri-close-line ms-3"></i>
                                         </h6>
                                         <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 11 / Qty: 1</span>
                                     </div>
@@ -255,17 +193,11 @@
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <p class="m-0 fw-bold fs-5">Grand Total</p>
-                                    <span class="text-muted small">Inc $45.89 sales tax</span>
                                 </div>
                                 <p class="m-0 fs-5 fw-bold">$422.99</p>
                             </div>
                         </div>
-                        <div class="py-4">
-                            <div class="input-group mb-0">
-                                <input type="text" class="form-control" placeholder="Enter your coupon code">
-                                <button class="btn btn-dark btn-sm px-4">Apply</button>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
