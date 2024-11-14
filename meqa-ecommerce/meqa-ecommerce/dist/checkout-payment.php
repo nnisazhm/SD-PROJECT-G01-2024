@@ -11,9 +11,9 @@ if (!isset($_SESSION['user_id'])) {
 // Retrieve session data for checkout
 $userEmail = $_SESSION['user_email'] ?? 'Not provided';
 $deliveryAddress = $_SESSION['delivery_address'] ?? 'No address set';
-$shippingMethod = $_SESSION['shipping_method'] ?? 'Standard Delivery';
+$shippingMethod = $_SESSION['shipping_method'] ?? 'Doorstep Delivery';
 $cartItems = $_SESSION['cart_items'] ?? [];
-$shippingCost = 8.95;
+$shippingCost = 5.00;
 
 // Calculate subtotal and grand total
 $subtotal = 0;
@@ -21,6 +21,16 @@ foreach ($cartItems as $item) {
     $subtotal += $item['price'] * $item['quantity'];
 }
 $grandTotal = $subtotal + $shippingCost;
+
+// Fetch user information from the database
+$user_id = $_SESSION['user_id'];
+$query = "SELECT email, firstname, lastname, phone, address FROM users WHERE id = ?";
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($stmt, "i", $user_id);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result($stmt, $email, $firstname, $lastname, $phone, $address);
+mysqli_stmt_fetch($stmt);
+mysqli_stmt_close($stmt);
 
 ?>
 
@@ -106,14 +116,14 @@ $grandTotal = $subtotal + $shippingCost;
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-start align-items-center">
                                         <span class="text-muted small me-2 f-w-36 fw-bolder">Contact</span>
-                                        <span class="small"><?= htmlspecialchars($userEmail) ?></span>
+                                        <span class="small"><?= htmlspecialchars($email) ?></span>
                                     </div>
                                     <a href="./checkout.php" class="text-muted small" role="button">Change</a>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-start align-items-center">
                                         <span class="text-muted small me-2 f-w-36 fw-bolder">Deliver To</span>
-                                        <span class="small"><?= htmlspecialchars($deliveryAddress) ?></span>
+                                        <span class="small"><?= htmlspecialchars($address) ?></span>
                                     </div>
                                     <a href="./checkout-shipping.php" class="text-muted small" role="button">Change</a>
                                 </li>
@@ -184,7 +194,7 @@ $grandTotal = $subtotal + $shippingCost;
                                             <h6 class="justify-content-between d-flex align-items-start mb-2"><?= htmlspecialchars($item['name']) ?></h6>
                                             <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: <?= htmlspecialchars($item['size']) ?> / Qty: <?= $item['quantity'] ?></span>
                                         </div>
-                                        <p class="fw-bolder text-end text-muted m-0">$<?= number_format($item['price'] * $item['quantity'], 2) ?></p>
+                                        <p class="fw-bolder text-end text-muted m-0">RM<?= number_format($item['price'] * $item['quantity'], 2) ?></p>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -194,18 +204,18 @@ $grandTotal = $subtotal + $shippingCost;
                         <div class="py-4 border-bottom">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <p class="m-0 fw-bolder fs-6">Subtotal</p>
-                                <p class="m-0 fs-6 fw-bolder">$<?= number_format($subtotal, 2) ?></p>
+                                <p class="m-0 fs-6 fw-bolder">RM<?= number_format($subtotal, 2) ?></p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <p class="m-0 fw-bolder fs-6">Shipping</p>
-                                <p class="m-0 fs-6 fw-bolder">$<?= number_format($shippingCost, 2) ?></p>
+                                <p class="m-0 fs-6 fw-bolder">RM<?= number_format($shippingCost, 2) ?></p>
                             </div>
                         </div>
 
                         <div class="py-4 border-bottom">
                             <div class="d-flex justify-content-between">
                             <div><p class="m-0 fw-bold fs-5">Grand Total</p></div>
-                            <p class="m-0 fs-5 fw-bold">$<?= number_format($grandTotal, 2) ?></p>
+                            <p class="m-0 fs-5 fw-bold">RM<?= number_format($grandTotal, 2) ?></p>
                         </div>
                     </div>
                         
