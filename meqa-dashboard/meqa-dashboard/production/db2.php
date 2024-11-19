@@ -1,8 +1,8 @@
 <?php
 // Database configuration
 $hostname = "localhost"; // Replace with your hostname if needed
-$username = "database2024"; // Replace with your database username
-$password = "database24"; // Replace with your database password
+$username = "root"; // Replace with your database username
+$password = "root"; // Replace with your database password
 $database = "meqa.my"; // Replace with your database name
 
 // Create connection
