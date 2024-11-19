@@ -52,12 +52,11 @@
   </noscript>
 
   <!-- Page Title -->
-  <title>Order History</title>
+  <title>Order History | MEQA.MY</title>
 
 </head>
 <body class="">
 
-    <!-- Navbar -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white flex-column border-0  ">
         <div class="container-fluid">
@@ -83,28 +82,6 @@
                         </li>
                         <!-- /Mobile Nav Toggler-->
     
-                        <!-- Navbar Search-->
-                        <li class="d-none d-sm-block">
-                            <span class="nav-link text-body search-trigger cursor-pointer">Search</span>
-    
-                            <!-- Search navbar overlay-->
-                            <div class="navbar-search d-none">
-                                <div class="input-group mb-3 h-100">
-                                    <span class="input-group-text px-4 bg-transparent border-0"><i
-                                            class="ri-search-line ri-lg"></i></span>
-                                    <input type="text" class="form-control text-body bg-transparent border-0"
-                                        placeholder="Enter your search terms...">
-                                    <span
-                                        class="input-group-text px-4 cursor-pointer disable-child-pointer close-search bg-transparent border-0"><i
-                                            class="ri-close-circle-line ri-lg"></i></span>
-                                </div>
-                            </div>
-                            <div class="search-overlay"></div>
-                            <!-- / Search navbar overlay-->
-    
-                        </li>
-                        <!-- /Navbar Search-->
-    
                         <!-- Navbar Login-->
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown dropdown position-static">
@@ -112,91 +89,25 @@
                                     Account
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./profile.html">Profile</a></li>
+                                    <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
                                     <li><a class="dropdown-item" href="./login.html">Log In</a></li>
                                 </ul> 
                             </li>
                         </ul>
                         <!-- /Navbar Login-->
-    
-                        <!-- Navbar Cart Icon-->
+
+                        <!-- Navbar Cart Icons-->
                         <li class="ms-1 d-inline-block position-relative dropdown-cart">
-                            <button class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body"
-                                type="button">
-                                Bag (2)
-                            </button>
-                            <div class="cart-dropdown dropdown-menu">
-                            
-                                <!-- Cart Header-->
-                                <div class="d-flex justify-content-between align-items-center border-bottom pt-3 pb-4">
-                                    <h6 class="fw-bolder m-0">Cart Summary (2 items)</h6>
-                                    <i class="ri-close-circle-line text-muted ri-lg cursor-pointer btn-close-cart"></i>
-                                </div>
-                                <!-- / Cart Header-->
-                            
-                                <!-- Cart Items-->
-                                <div>
-                            
-                                    <!-- Cart Product-->
-                                    <div class="row mx-0 py-4 g-0 border-bottom">
-                                        <div class="col-2 position-relative">
-                                            <picture class="d-block ">
-                                                <img class="img-fluid" src="./assets/images/products/product-cart-1.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
-                                            </picture>
-                                        </div>
-                                        <div class="col-9 offset-1">
-                                            <div>
-                                                <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                    Nike Air VaporMax 2021
-                                                    <i class="ri-close-line ms-3"></i>
-                                                </h6>
-                                                <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 / Qty: 1</span>
-                                            </div>
-                                            <p class="fw-bolder text-end text-muted m-0">$85.00</p>
-                                        </div>
-                                    </div>
-                                    <!-- Cart Product-->
-                                    <div class="row mx-0 py-4 g-0 border-bottom">
-                                        <div class="col-2 position-relative">
-                                            <picture class="d-block ">
-                                                <img class="img-fluid" src="./assets/images/products/product-cart-2.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
-                                            </picture>
-                                        </div>
-                                        <div class="col-9 offset-1">
-                                            <div>
-                                                <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                    Nike ZoomX Vaporfly
-                                                    <i class="ri-close-line ms-3"></i>
-                                                </h6>
-                                                <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 11 / Qty: 1</span>
-                                            </div>
-                                            <p class="fw-bolder text-end text-muted m-0">$125.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /Cart Items-->
-                            
-                                <!-- Cart Summary-->
-                                <div>
-                                    <div class="pt-3">
-                                        <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-start mb-4 mb-md-2">
-                                            <div>
-                                                <p class="m-0 fw-bold fs-5">Grand Total</p>
-                                                <span class="text-muted small">Inc $45.89 sales tax</span>
-                                            </div>
-                                            <p class="m-0 fs-5 fw-bold">$422.99</p>
-                                        </div>
-                                    </div>
-                                    <a href="./cart.html" class="btn btn-outline-dark w-100 text-center mt-4" role="button">View Cart</a>
-                                    <a href="./checkout.html" class="btn btn-dark w-100 text-center mt-2" role="button">Proceed To Checkout</a>
-                                </div>
-                                <!-- / Cart Summary-->
-                              </div>
-                            
-    
+                            <a button class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body" type="button" href="cart.php">
+                                Bag
+                            </a>
                         </li>
                         <!-- /Navbar Cart Icon-->
-    
+
+
+
+
+
                     </ul>
                     <!-- Navbar Icons-->                
     
@@ -208,12 +119,12 @@
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown dropdown position-static">
                               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Eid 2023 Collection
+                                Eid 2024 Collection
                               </a>
                               <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./category.html">Kaftan</a></li>
-                                <li><a class="dropdown-item" href="./category.html">Kurung</a></li>
-                                <li><a class="dropdown-item" href="./category.html">Abaya</a></li>
+                                <li><a class="dropdown-item" href="./category-eid.html">Kaftan</a></li>
+                                <li><a class="dropdown-item" href="./category-eid.html">Kurung</a></li>
+                                <li><a class="dropdown-item" href="./category-eid.html">Abaya</a></li>
                               </ul>  
                             </li>
                             <li class="nav-item dropdown">
@@ -221,11 +132,11 @@
                                   Women
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="./category.html">Tops</a></li>
-                                  <li><a class="dropdown-item" href="./category.html">Bottoms</a></li>
-                                  <li><a class="dropdown-item" href="./category.html">Outerwear</a></li>
-                                  <li><a class="dropdown-item" href="./category.html">Dresses</a></li>
-                                  <li><a class="dropdown-item" href="./category.html">Sets</a></li>
+                                  <li><a class="dropdown-item" href="./category-tops.html">Tops</a></li>
+                                  <li><a class="dropdown-item" href="./category-bottoms.html">Bottoms</a></li>
+                                  <li><a class="dropdown-item" href="./category-outerwear.html">Outerwear</a></li>
+                                  <li><a class="dropdown-item" href="./category-dresses.html">Dresses</a></li>
+                                  <li><a class="dropdown-item" href="./category-sets.html">Sets</a></li>
                                 </ul>
                               </li>
                               <li class="nav-item dropdown">
@@ -233,8 +144,8 @@
                                   Hijab
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./category.html">Bawal</a></li>
-                                    <li><a class="dropdown-item" href="./category.html">Shawl</a></li>
+                                    <li><a class="dropdown-item" href="./category-hijab.html">Bawal</a></li>
+                                    <li><a class="dropdown-item" href="./category-hijab.html">Shawl</a></li>
                                 </ul>
                               </li>
                               <li class="nav-item dropdown">
@@ -242,26 +153,20 @@
                                   Sale
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./category.html">50% Off</a></li>
-                                    <li><a class="dropdown-item" href="./category.html">25% Off</a></li>
+                                    <li><a class="dropdown-item" href="./category-sale.html">August Sale</a></li>
                                 </ul>
                               </li>
                               <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Pages
+                                  Our Company
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="./index.html">Homepage</a></li>
-                                  <li><a class="dropdown-item" href="./category.html">Category</a></li>
-                                  <li><a class="dropdown-item" href="./product.html">Product</a></li>
-                                  <li><a class="dropdown-item" href="./cart.html">Cart</a></li>
-                                  <li><a class="dropdown-item" href="./checkout.html">Checkout</a></li>
-                                  <li><a class="dropdown-item" href="./login.html">Login</a></li>
-                                  <li><a class="dropdown-item" href="./register.html">Register</a></li>
-                                  <li><a class="dropdown-item" href="./forgotten-password.html">Forgotten Password</a></li>
+                                  <li><a class="dropdown-item" href="./about.html">About Us</a></li>
+                                  <li><a class="dropdown-item" href="./contact.html">Contact Us</a></li>
                                 </ul>
                               </li>
-                          </ul>                    <!-- / Menu-->
+                          </ul>                    
+                          <!-- / Menu-->
     
                     </div>
                     <!-- / Main Navigation-->
@@ -270,7 +175,7 @@
             </div>
         </div>
     </nav>
-    <!-- / Navbar-->    <!-- / Navbar-->
+    <!-- / Navbar-->
 
 <!-- Main Section-->
 <section class="mt-0 overflow-hidden">
@@ -388,116 +293,94 @@
     <!-- / Main Section-->
     <!--====== Main Footer ======-->
     <footer class="border-top py-5 mt-4" style="background-color: black; color: white; font-family: 'Roboto', sans-serif;">
-      <div class="outer-footer">
-          <div class="container">
-              <div class="row">
-                  <div class="col-lg-4 col-md-6">
-                      <div class="outer-footer__content u-s-m-b-40">
-                          <span class="fw-bold mb-2" style="color: white; font-weight: 700;">Contact Us</span>
-                          <div class="outer-footer__text-wrap"><i class="fas fa-home" style="color: white;"></i>
-                              <span style="color: white; font-weight: 400;">Solaris Dutamas, 50480 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur Malaysia</span></div>
-                          <div class="outer-footer__text-wrap"><i class="fas fa-phone-volume" style="color: white;"></i>
-                              <span style="color: white; font-weight: 400;">(+60)1111722636</span></div>
-                          <div class="outer-footer__text-wrap"><i class="far fa-envelope" style="color: white;"></i>
-                              <span style="color: white; font-weight: 400;">@meqa.my</span></div>
-                      </div>
-                  </div>
-                  <div class="col-lg-4 col-md-6">
-                      <div class="row">
-                          <div class="col-lg-6 col-md-6">
-                              <div class="outer-footer__content u-s-m-b-40">
-                                  <span class="fw-bold mb-2" style="color: white; font-weight: 700;">Pages</span>
-                                  <div class="outer-footer__list-wrap">
-                                      <ul style="list-style: none; padding-left: 0;">
-                                          <li><a href="forgotten-password.html" style="text-decoration: none; color: white; font-weight: 400;">Reset password</a></li>
-                                          <li><a href="change-password-2.html" style="text-decoration: none; color: white; font-weight: 400;">Change password</a></li>
-                                          <li><a href="reset_password.php" style="text-decoration: none; color: white; font-weight: 400;">Reeeeset password</a></li>
-                                          <li><a href="dash-payment-option.html" style="text-decoration: none; color: white; font-weight: 400;">Finance</a></li>
-                                          <li><a href="shop-side-version-2.html" style="text-decoration: none; color: white; font-weight: 400;">Shop</a></li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-lg-6 col-md-6">
-                              <div class="outer-footer__content u-s-m-b-40">
-                                  <div class="outer-footer__list-wrap">
-                                      <span class="fw-bold mb-2" style="color: white; font-weight: 700;">Our Company</span>
-                                      <ul style="list-style: none; padding-left: 0;">
-                                          <li><a href="about.html" style="text-decoration: none; color: white; font-weight: 400;">About us</a></li>
-                                          <li><a href="contact.html" style="text-decoration: none; color: white; font-weight: 400;">Contact Us</a></li>
-                                          <li><a href="index.html" style="text-decoration: none; color: white; font-weight: 400;">Sitemap</a></li>
-                                          <li><a href="orderHistory.php" style="text-decoration: none; color: white; font-weight: 400;">Delivery</a></li>
-                                          <li><a href="shop-side-version-2.html" style="text-decoration: none; color: white; font-weight: 400;">Store</a></li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-4 col-md-12">
-    <div class="outer-footer__content">
-        <span class="fw-bold mb-2" style="color: white; font-weight: 700;">Get In Touch</span>
-        <form class="contact-f" method="post" action="feedbackForm.php">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 u-h-100">
-                    <div class="u-s-m-b-30">
-                        <label for="c-name"></label>
-                        <input name="name" class="input-text input-text--border-radius input-text--primary-style" 
-                            type="text" id="c-name" placeholder="Name (Required)" required 
-                            style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
+        <div class="outer-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="outer-footer__content u-s-m-b-40">
+                            <span class="fw-bold mb-2" style="color: white; font-weight: 700;">Contact Us</span>
+                            <div class="outer-footer__text-wrap"><i class="fas fa-home" style="color: white;"></i>
+                                <span style="color: white; font-weight: 400;">Solaris Dutamas, 50480 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur Malaysia</span></div>
+                            <div class="outer-footer__text-wrap"><i class="fas fa-phone-volume" style="color: white;"></i>
+                                <span style="color: white; font-weight: 400;">(+60)1111722636</span></div>
+                            <div class="outer-footer__text-wrap"><i class="far fa-envelope" style="color: white;"></i>
+                                <span style="color: white; font-weight: 400;">@meqa.my</span></div>
+                        </div>
                     </div>
-                    <div class="u-s-m-b-30">
-                        <label for="c-email"></label>
-                        <input name="email" class="input-text input-text--border-radius input-text--primary-style" 
-                            type="text" id="c-email" placeholder="Email (Required)" required 
-                            style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="outer-footer__content u-s-m-b-40">
+                                    <span class="fw-bold mb-2" style="color: white; font-weight: 700;">Information</span>
+                                    <div class="outer-footer__list-wrap">
+                                        <ul style="list-style: none; padding-left: 0;">
+                                            <li><a href="cart.php" style="text-decoration: none; color: white; font-weight: 400;">Cart</a></li>
+                                            <li><a href="profile.php" style="text-decoration: none; color: white; font-weight: 400;">Account</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="outer-footer__content u-s-m-b-40">
+                                    <div class="outer-footer__list-wrap">
+                                        <span class="fw-bold mb-2" style="color: white; font-weight: 700;">Our Company</span>
+                                        <ul style="list-style: none; padding-left: 0;">
+                                            <li><a href="about.html" style="text-decoration: none; color: white; font-weight: 400;">About us</a></li>
+                                            <li><a href="contact.html" style="text-decoration: none; color: white; font-weight: 400;">Contact Us</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="u-s-m-b-30">
-                        <label for="c-subject"></label>
-                        <input name="subject" class="input-text input-text--border-radius input-text--primary-style" 
-                            type="text" id="c-subject" placeholder="Subject (Required)" required 
-                            style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
+                    <div class="col-lg-4 col-md-12">
+                      <div class="outer-footer__content">
+                        <span class="fw-bold mb-2" style="color: white; font-weight: 700;">Get In Touch</span>
+                        <form class="contact-f" method="post" action="feedbackForm.php">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 u-h-100">
+                                    <div class="u-s-m-b-30">
+                                        <label for="c-name"></label>
+                                        <input name="name" class="input-text input-text--border-radius input-text--primary-style" 
+                                            type="text" id="c-name" placeholder="Name (Required)" required 
+                                            style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
+                                    </div>
+                                    <div class="u-s-m-b-30">
+                                        <label for="c-email"></label>
+                                        <input name="email" class="input-text input-text--border-radius input-text--primary-style" 
+                                            type="text" id="c-email" placeholder="Email (Required)" required 
+                                            style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
+                                    </div>
+                                    <div class="u-s-m-b-30">
+                                        <label for="c-subject"></label>
+                                        <input name="subject" class="input-text input-text--border-radius input-text--primary-style" 
+                                            type="text" id="c-subject" placeholder="Subject (Required)" required 
+                                            style="width: 100%; padding: 10px; margin-bottom: 1px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 u-h-100">
+                                    <div class="u-s-m-b-30">
+                                        <label for="c-message"></label>
+                                        <textarea name="message" class="text-area text-area--border-radius text-area--primary-style" 
+                                            id="c-message" placeholder="Compose a Message (Required)" required 
+                                            style="width: 100%; padding: 10px; height: 165px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button class="btn btn--e-brand-b-2" type="submit" 
+                                        style="background-color: #ffffff; color: black; padding: 10px; margin-bottom: 20px; border: none; border-radius: 5px; font-size: 14px; cursor: pointer; transition: background-color 0.3s ease; font-family: 'Roboto', sans-serif; font-weight: 700;">
+                                        Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-6 u-h-100">
-                    <div class="u-s-m-b-30">
-                        <label for="c-message"></label>
-                        <textarea name="message" class="text-area text-area--border-radius text-area--primary-style" 
-                            id="c-message" placeholder="Compose a Message (Required)" required 
-                            style="width: 100%; padding: 10px; height: 165px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc; background-color: #333; color: white; font-size: 14px; font-family: 'Roboto', sans-serif; font-weight: 400;"></textarea>
                     </div>
-                </div>
-                <div class="col-lg-12">
-                    <button class="btn btn--e-brand-b-2" type="submit" 
-                        style="background-color: #ffffff; color: black; padding: 10px; margin-bottom: 20px; border: none; border-radius: 5px; font-size: 14px; cursor: pointer; transition: background-color 0.3s ease; font-family: 'Roboto', sans-serif; font-weight: 700;">
-                        Send Message
-                    </button>
                 </div>
             </div>
-        </form>
-    </div>
-</div>
-
-              </div>
-          </div>
-      </div>
-      <div class="lower-footer" style="background-color: black; font-family: 'Roboto', sans-serif;">
-          <div class="container">
-              <div class="row">
-                  <div class="col-lg-12">
-                      <div class="lower-footer__content">
-                          <div class="lower-footer__copyright">
-                              <span style="color: white; font-weight: 400;">Copyright © 2018</span>
-                              <a href="index.html" style="color: white; font-weight: 700;">Reshop</a>
-                              <span style="color: white; font-weight: 400;">All Right Reserved</span>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </footer>
-  <!--====== End - Main App ======-->
+        </div>
+    </footer>
+    <!--====== End - Main App ======-->
     <!-- Theme JS -->
     <!-- Vendor JS -->
     <script src="./assets/js/vendor.bundle.js"></script>
