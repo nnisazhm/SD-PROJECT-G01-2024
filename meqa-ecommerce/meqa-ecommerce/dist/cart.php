@@ -86,22 +86,7 @@ if (!isset($_SESSION['cart'])) {
                                         <!-- Loop through the cart items -->
                                         <?php foreach ($_SESSION['cart'] as $key => $cart_item): ?>
                                             <div class="row mx-0 py-4 g-0 border-bottom">
-                                                <div class="col-2 position-relative">
-                                                    <picture class="d-block border">
-                                                        <?php 
-                                                        // Check if 'product_images' exists and is not empty
-                                                        if (isset($cart_item['product_images']) && !empty($cart_item['product_images'])) {
-                                                            $product_images = explode(',', $cart_item['product_images']);
-                                                            foreach ($product_images as $image): ?>
-                                                                <img class="img-fluid" src="./assets/images/products/<?php echo htmlspecialchars($image); ?>" alt="Product Image">
-                                                            <?php endforeach;
-                                                        } else {
-                                                            // Fallback if no images are available
-                                                            echo '<p>No images available</p>';
-                                                        }
-                                                        ?>
-                                                    </picture>
-                                                </div>
+                                                
                                                 <div class="col-9 offset-1">
                                                     <div>
                                                         <h6 class="justify-content-between d-flex align-items-start mb-2">
@@ -112,7 +97,7 @@ if (!isset($_SESSION['cart'])) {
                                                             Size: <?= htmlspecialchars($cart_item['product_size']); ?> / Qty: <?= htmlspecialchars($cart_item['product_quantity']); ?>
                                                         </span>
                                                     </div>
-                                                    <p class="fw-bolder text-end text-muted m-0"><?= htmlspecialchars($cart_item['product_price']); ?></p>
+                                                    <p class="fw-bolder text-end text-muted m-0">RM <?= htmlspecialchars($cart_item['product_price']); ?></p>
                                                 </div>
                                             </div>
                                         <?php endforeach; ?>
@@ -135,7 +120,7 @@ if (!isset($_SESSION['cart'])) {
                                 </div>
                                 <!-- Grand Total Calculation -->
                                 <p class="m-0 fs-5 fw-bold">
-                                    <?php
+                                    RM <?php
                                     $total = 0;
                                     foreach ($_SESSION['cart'] as $cart_item) {
                                         $total += $cart_item['product_price'] * $cart_item['product_quantity'];
