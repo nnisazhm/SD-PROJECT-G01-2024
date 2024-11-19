@@ -12,13 +12,13 @@ if (!isset($_SESSION['user_id'])) {
 $userEmail = $_SESSION['user_email'] ?? 'Not provided';
 $deliveryAddress = $_SESSION['delivery_address'] ?? 'No address set';
 $shippingMethod = $_SESSION['shipping_method'] ?? 'Doorstep Delivery';
-$cartItems = $_SESSION['cart_items'] ?? [];
+$cartItems = $_SESSION['cart'] ?? [];
 $shippingCost = 5.00;
 
 // Calculate subtotal and grand total
 $subtotal = 0;
 foreach ($cartItems as $item) {
-    $subtotal += $item['price'] * $item['quantity'];
+    $subtotal += $item['product_price'] * $item['product_quantity'];
 }
 $grandTotal = $subtotal + $shippingCost;
 
@@ -33,6 +33,7 @@ mysqli_stmt_fetch($stmt);
 mysqli_stmt_close($stmt);
 
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -173,7 +174,10 @@ mysqli_stmt_close($stmt);
                             <div class="pt-5 mt-5 pb-5 border-top d-flex flex-column flex-md-row justify-content-between align-items-center">
                               <a href="./checkout-shipping.php" class="btn ps-md-0 btn-link fw-bolder w-100 w-md-auto mb-2 mb-md-0" role="button">Back to
                                 shipping</a>
-                              <a href="#" class="btn btn-dark w-100 w-md-auto" role="button">Complete Order</a>
+
+                              <form id="completeOrderForm" class="contact-f" method="post" action="create-bill.php">
+                                <button class="btn btn-dark w-100 w-md-auto" type="submit">Complete Order</button>
+                              </form>
                             </div>
                         </div>
                     </div>
@@ -184,17 +188,13 @@ mysqli_stmt_close($stmt);
                             <!-- Cart Items Summary -->
                             <?php foreach ($cartItems as $item): ?>
                                 <div class="row mx-0 py-4 g-0 border-bottom">
-                                    <div class="col-2 position-relative">
-                                        <picture class="d-block border">
-                                            <img class="img-fluid" src="<?= htmlspecialchars($item['image_path']) ?>" alt="<?= htmlspecialchars($item['name']) ?>">
-                                        </picture>
-                                    </div>
+                                    
                                     <div class="col-9 offset-1">
                                         <div>
-                                            <h6 class="justify-content-between d-flex align-items-start mb-2"><?= htmlspecialchars($item['name']) ?></h6>
-                                            <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: <?= htmlspecialchars($item['size']) ?> / Qty: <?= $item['quantity'] ?></span>
+                                            <h6 class="justify-content-between d-flex align-items-start mb-2"><?= htmlspecialchars($item['product_name']) ?></h6>
+                                            <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: <?= htmlspecialchars($item['product_size']) ?> / Qty: <?= $item['product_quantity'] ?></span>
                                         </div>
-                                        <p class="fw-bolder text-end text-muted m-0">RM<?= number_format($item['price'] * $item['quantity'], 2) ?></p>
+                                        <p class="fw-bolder text-end text-muted m-0">RM<?= number_format($item['product_price'] * $item['product_quantity'], 2) ?></p>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
