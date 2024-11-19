@@ -273,7 +273,7 @@ document.getElementById('search-bar').addEventListener('keypress', function (e) 
                 <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-truck" style="margin-right: 10px;"></i> Track Order</a></li>
                 <li style="margin-bottom: 15px;"><a href="orderHistory.php" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i> My Orders</a></li>
                 <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-credit-card" style="margin-right: 10px;"></i> My Payment Options</a></li>
-                <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-undo" style="margin-right: 10px;"></i> My Returns & Cancellations</a></li>
+                <li style="margin-bottom: 15px;"><a href="#" style="text-decoration: none; color: black; display: flex; align-items: center;"><i class="fas fa-undo" style="margin-right: 10px;"></i> Log Out</a></li>
             </ul>
         </div>
 
